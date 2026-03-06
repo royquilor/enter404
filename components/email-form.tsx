@@ -53,30 +53,41 @@ export default function EmailForm() {
   if (isSuccess) {
     return (
       <div className="text-white/90 text-sm">
-        ✓ You&apos;re in. See you in the 404 phase.
+        ✓ Check your email to confirm your subscription.
       </div>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
-      {/* Honeypot field - hidden from users */}
+      {/* Honeypot field - hidden from users but visible to bots */}
       <input
+        id="website"
         type="text"
         name="website"
         tabIndex={-1}
         autoComplete="off"
-        className="absolute opacity-0 pointer-events-none"
+        style={{
+          position: "absolute",
+          left: "-9999px",
+          width: "1px",
+          height: "1px",
+          opacity: 0,
+          pointerEvents: "none",
+        }}
         aria-hidden="true"
       />
 
       <div className="flex-1">
         <Input
+          id="email"
+          name="email"
           type="email"
           placeholder="Your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={isPending}
+          maxLength={254}
           className="bg-transparent border-white/30 text-white placeholder:text-white/50 focus-visible:ring-white/50"
           aria-label="Email address"
           required
