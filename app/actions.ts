@@ -4,7 +4,12 @@ import { Resend } from "resend";
 import { validateEmail, normalizeEmail } from "@/lib/validation";
 import { generateConfirmToken, verifyConfirmToken } from "@/lib/token";
 import { headers } from "next/headers";
-import { kv } from "@vercel/kv";
+import { Redis } from "@upstash/redis";
+
+const kv = new Redis({
+  url: process.env.KV_REST_API_URL!,
+  token: process.env.KV_REST_API_TOKEN!,
+});
 
 // Resend client is created only when RESEND_API_KEY is set (avoids crash on load when key is missing)
 
