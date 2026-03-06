@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 
 interface UseTextStreamOptions {
   /**
-   * Delay in milliseconds between each character
+   * Delay in milliseconds between each character or word
    */
   delay?: number;
   /**
@@ -15,6 +15,10 @@ interface UseTextStreamOptions {
    * Callback when streaming is complete
    */
   onComplete?: () => void;
+  /**
+   * Streaming mode: 'char' for character-by-character, 'word' for word-by-word
+   */
+  mode?: 'char' | 'word';
 }
 
 /**
@@ -26,8 +30,8 @@ interface UseTextStreamOptions {
 export function useTextStream(
   text: string,
   options: UseTextStreamOptions = {}
-): string {
-  const { delay = 30, respectReducedMotion = true, onComplete } = options;
+): { displayedText: string; isComplete: boolean } {
+  const { delay = 30, respectReducedMotion = true, onComplete, mode = 'char' } = options;
   const [displayedText, setDisplayedText] = useState("");
   const [isComplete, setIsComplete] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -57,34 +61,67 @@ export function useTextStream(
     // Reset state when text changes
     setDisplayedText("");
     setIsComplete(false);
-    let currentIndex = 0;
 
-    const stream = () => {
-      if (currentIndex < text.length) {
-        setDisplayedText(text.slice(0, currentIndex + 1));
-        currentIndex++;
-        timeoutRef.current = setTimeout(stream, delay);
-      } else {
-        setIsComplete(true);
-        // Call onComplete callback when streaming finishes (only once)
-        if (onCompleteRef.current && !hasCalledCompleteRef.current) {
-          hasCalledCompleteRef.current = true;
-          onCompleteRef.current();
+    if (mode === 'word') {
+      // Word-by-word streaming
+      const words = text.split(/(\s+)/); // Split by whitespace but keep the spaces
+      let currentIndex = 0;
+
+      const stream = () => {
+        if (currentIndex < words.length) {
+          setDisplayedText(words.slice(0, currentIndex + 1).join(''));
+          currentIndex++;
+          timeoutRef.current = setTimeout(stream, delay);
+        } else {
+          setIsComplete(true);
+          // Call onComplete callback when streaming finishes (only once)
+          if (onCompleteRef.current && !hasCalledCompleteRef.current) {
+            hasCalledCompleteRef.current = true;
+            onCompleteRef.current();
+          }
         }
-      }
-    };
+      };
 
-    // Start streaming after a brief delay
-    const startTimeout = setTimeout(stream, 100);
+      // Start streaming after a brief delay
+      const startTimeout = setTimeout(stream, 100);
 
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-      clearTimeout(startTimeout);
-    };
-  }, [text, delay, respectReducedMotion]);
+      return () => {
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
+        clearTimeout(startTimeout);
+      };
+    } else {
+      // Character-by-character streaming (original behavior)
+      let currentIndex = 0;
 
-  return displayedText;
+      const stream = () => {
+        if (currentIndex < text.length) {
+          setDisplayedText(text.slice(0, currentIndex + 1));
+          currentIndex++;
+          timeoutRef.current = setTimeout(stream, delay);
+        } else {
+          setIsComplete(true);
+          // Call onComplete callback when streaming finishes (only once)
+          if (onCompleteRef.current && !hasCalledCompleteRef.current) {
+            hasCalledCompleteRef.current = true;
+            onCompleteRef.current();
+          }
+        }
+      };
+
+      // Start streaming after a brief delay
+      const startTimeout = setTimeout(stream, 100);
+
+      return () => {
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
+        clearTimeout(startTimeout);
+      };
+    }
+  }, [text, delay, respectReducedMotion, mode]);
+
+  return { displayedText, isComplete };
 }
 

@@ -31,7 +31,7 @@ export default function SequentialTextStream({
   const [completedSegments, setCompletedSegments] = useState<string[]>([]);
 
   const currentSegment = segments[currentSegmentIndex];
-  const displayedText = useTextStream(
+  const { displayedText, isComplete } = useTextStream(
     currentSegment?.text || "",
     { delay: currentSegment?.delay || 30 }
   );
@@ -40,7 +40,7 @@ export default function SequentialTextStream({
     // Check if current segment is complete
     if (
       currentSegment &&
-      displayedText === currentSegment.text &&
+      isComplete &&
       !completedSegments.includes(currentSegment.text)
     ) {
       // Mark segment as complete
@@ -58,7 +58,7 @@ export default function SequentialTextStream({
         }
       }
     }
-  }, [displayedText, currentSegment, currentSegmentIndex, segments, completedSegments, onComplete]);
+  }, [displayedText, isComplete, currentSegment, currentSegmentIndex, segments, completedSegments, onComplete]);
 
   // Build the display: show completed segments + current streaming segment
   const displayText = [

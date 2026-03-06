@@ -3,35 +3,30 @@
 import { useTextStream } from "@/hooks/use-text-stream";
 
 interface TextStreamProps {
-  /**
-   * The text to stream
-   */
   text: string;
-  /**
-   * Delay in milliseconds between each character
-   */
   delay?: number;
-  /**
-   * Additional CSS classes
-   */
   className?: string;
-  /**
-   * Callback when streaming is complete
-   */
   onComplete?: () => void;
+  mode?: "char" | "word";
+  showCursor?: boolean;
 }
 
-/**
- * Component that streams text character by character
- */
 export default function TextStream({
   text,
   delay = 30,
   className,
   onComplete,
+  mode = "word",
+  showCursor = false,
 }: TextStreamProps) {
-  const displayedText = useTextStream(text, { delay, onComplete });
+  const { displayedText, isComplete } = useTextStream(text, { delay, onComplete, mode });
 
-  return <span className={className}>{displayedText}</span>;
+  return (
+    <span className={className} aria-live="polite" aria-label={text}>
+      <span aria-hidden="true">{displayedText}</span>
+      {showCursor && !isComplete && (
+        <span className="cursor-blink" aria-hidden="true">▋</span>
+      )}
+    </span>
+  );
 }
-
