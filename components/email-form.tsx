@@ -105,7 +105,7 @@ export default function EmailForm() {
         className="bg-white/10 text-white border-white/30 hover:bg-white/20 disabled:opacity-50"
         aria-label="Submit email"
       >
-        {isPending ? "Submitting..." : "Notify me"}
+        {isPending ? "Joining..." : "Join the explorers"}
       </Button>
     </form>
   );

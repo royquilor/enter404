@@ -33,35 +33,20 @@ export default function HeroSection() {
 
       <div className="relative z-10 max-w-sm px-6 py-6">
         <h1 className="text-white text-sm font-mono mb-8 leading-tight">
-          You&apos;re not lost.
-          <br />
-          You&apos;re early.
+          Design inside the chaos.
         </h1>
 
-        <div className="text-white/90 text-sm mb-8 space-y-4">
+        <div className="text-white/90 text-sm mb-8 space-y-4 text-balance">
           <p>
-            Most ideas don&apos;t start clear.
+            AI is rewriting how products are built.
             <br />
-            They start unfinished, uncertain, and slightly wrong.
+            Designers are expected to move faster, code more,
+            and collaborate with machines.
           </p>
-          <p>
-            Enter404 is a place for that phase —
-            <br />
-            before the roadmap, before the polish,
-            <br />
-            before it all makes sense.
+          <p className="text-balance">
+            Enter404 is where I document how designers
+            navigate this new world.
           </p>
-        </div>
-
-        <div className="text-white/90 text-sm mb-8">
-          <p className="mb-4">If you&apos;re interested in:</p>
-          <ul className="list-none mb-4">
-            <li>• unfinished ideas</li>
-            <li>• naming systems</li>
-            <li>• early concepts</li>
-            <li>• tools before they&apos;re tools</li>
-          </ul>
-          <p className="mb-6">Leave your email.</p>
         </div>
 
         <EmailForm />
@@ -79,24 +64,21 @@ export default function HeroSection() {
 
       <div className="relative z-10 px-6 py-24 text-center">
         <h1 className="text-white text-sm font-mono mb-6 leading-tight">
-          You&apos;re not lost. You&apos;re early.
+          Design inside the chaos.
         </h1>
 
         <div className="text-white/90 text-sm mb-6 space-y-3">
           <p>
-            Enter404 is a place for unfinished ideas —
+            AI is rewriting how products are built.
             <br />
-            before the roadmap, before the polish.
+            Designers are expected to move faster, code more,
+            <br />
+            and collaborate with machines.
           </p>
-        </div>
-
-        <div className="text-white/90 text-sm mb-6">
           <p>
-            If you&apos;re interested in early concepts
+            Enter404 is where I document how designers
             <br />
-            and tools before they&apos;re tools:
-            <br />
-            Leave your email.
+            navigate this new world.
           </p>
         </div>
 
