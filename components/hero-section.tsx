@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import VideoBackground from "@/components/video-background";
 import EmailForm from "@/components/email-form";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 /**
  * Main hero section component
@@ -38,15 +39,24 @@ export default function HeroSection() {
 
         <div className="text-white/90 text-sm mb-8 space-y-4 text-balance">
           <p>
-            AI is rewriting how products are built.
-            <br />
-            Designers are expected to move faster, code more,
-            and collaborate with machines.
+            AI is rewriting how products are built. Designers are expected to move faster, code more, and collaborate with machines.
           </p>
           <p className="text-balance">
-            Enter404 is where I document how designers
-            navigate this new world.
+            Enter404 is where I document how designers navigate this new world.
           </p>
+        </div>
+
+        <div className="flex items-center gap-3 mb-8">
+          <Avatar className="h-8 w-8">
+            <AvatarImage src="https://avatars.githubusercontent.com/u/2366186?v=4" alt="Roy" />
+            <AvatarFallback>R</AvatarFallback>
+          </Avatar>
+          <span className="text-white/60 text-sm">
+            Roy{" "}
+            <a href="https://x.com/RoyQuilor" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">X ↗</a>
+            {" · "}
+            <a href="https://www.youtube.com/@404roy" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">YouTube ↗</a>
+          </span>
         </div>
 
         <EmailForm />
@@ -80,6 +90,19 @@ export default function HeroSection() {
             <br />
             navigate this new world.
           </p>
+        </div>
+
+        <div className="flex items-center justify-center gap-3 mb-8">
+          <Avatar className="h-8 w-8">
+            <AvatarImage src="https://avatars.githubusercontent.com/u/2366186?v=4" alt="Roy" />
+            <AvatarFallback>R</AvatarFallback>
+          </Avatar>
+          <span className="text-white/60 text-sm">
+            Roy{" "}
+            <a href="https://x.com/RoyQuilor" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">X ↗</a>
+            {" · "}
+            <a href="https://www.youtube.com/@404roy" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">YouTube ↗</a>
+          </span>
         </div>
 
         <div className="mb-8">
