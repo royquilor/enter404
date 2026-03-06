@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { confirmEmail } from "@/app/actions";
 
 interface Props {
@@ -29,9 +30,9 @@ function ConfirmLayout({ message, success }: { message: string; success: boolean
           {success ? "✓" : "✕"}
         </p>
         <p className="text-white/70 text-base">{message}</p>
-        <a href="/" className="mt-8 inline-block text-sm text-white/40 hover:text-white/70 transition-colors">
+        <Link href="/" className="mt-8 inline-block text-sm text-white/40 hover:text-white/70 transition-colors">
           ← Back to enter404.com
-        </a>
+        </Link>
       </div>
     </main>
   );
