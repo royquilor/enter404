@@ -52,7 +52,7 @@ export default function HeroSection() {
             <AvatarFallback>R</AvatarFallback>
           </Avatar>
           <span className="text-white/60 text-sm">
-            Roy{" "}
+            Roy Quilor{" "}
             <a href="https://x.com/RoyQuilor" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">X ↗</a>
             {" · "}
             <a href="https://www.youtube.com/@404roy" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">YouTube ↗</a>
@@ -98,7 +98,7 @@ export default function HeroSection() {
             <AvatarFallback>R</AvatarFallback>
           </Avatar>
           <span className="text-white/60 text-sm">
-            Roy{" "}
+            Roy Quilor{" "}
             <a href="https://x.com/RoyQuilor" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">X ↗</a>
             {" · "}
             <a href="https://www.youtube.com/@404roy" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">YouTube ↗</a>
