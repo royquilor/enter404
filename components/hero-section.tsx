@@ -71,7 +71,7 @@ export default function HeroSection() {
           <p className={`${fade} ${headlineComplete ? "opacity-100" : "opacity-0"}`}>
             {headlineComplete && (
               <TextStream
-                text="AI is rewriting how products are built. Designers are expected to move faster, code more, and collaborate with machines."
+                text="Are you feeling drained from AI? You still love the craft but feel that your process is being smashed."
                 delay={35}
                 mode="word"
                 showCursor
@@ -117,7 +117,7 @@ export default function HeroSection() {
           <p className={`${fade} ${headlineComplete ? "opacity-100" : "opacity-0"}`}>
             {headlineComplete && (
               <TextStream
-                text="AI is rewriting how products are built. Designers are expected to move faster, code more, and collaborate with machines."
+                text="Are you feeling drained from all this AI? You still love the craft but feel that your process is being smashed."
                 delay={35}
                 mode="word"
                 showCursor
