@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 // Load Commit Mono variable font
@@ -29,6 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${commitMono.variable} font-mono antialiased`}>
         {children}
+        <Analytics />
       </body>
     </html>
   );
