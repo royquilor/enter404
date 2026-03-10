@@ -83,7 +83,7 @@ async function checkRateLimit(ip: string): Promise<boolean> {
  * Validates email, checks honeypot, and sends notification via Resend
  */
 export async function submitEmail(
-  formData: { email: string; website?: string }
+  formData: { email: string; website?: string; utmSource?: string }
 ): Promise<SubmitEmailResult> {
   try {
     // Rate limiting check
@@ -157,6 +157,7 @@ export async function submitEmail(
       email: normalizedEmail,
       unsubscribed: true, // stays unsubscribed until they confirm
       audienceId,
+      ...(formData.utmSource ? { firstName: formData.utmSource } : {}),
     });
 
     if (createContactError) {

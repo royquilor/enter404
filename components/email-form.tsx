@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { validateEmail, normalizeEmail } from "@/lib/validation";
@@ -15,6 +15,15 @@ export default function EmailForm() {
   const [error, setError] = useState("");
   const [isPending, startTransition] = useTransition();
   const [isSuccess, setIsSuccess] = useState(false);
+  const [utmSource, setUtmSource] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const source = params.get("utm_source");
+    if (source) {
+      setUtmSource(source.replace(/[^a-zA-Z0-9._-]/g, "").slice(0, 100));
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,6 +45,7 @@ export default function EmailForm() {
         const result = await submitEmail({
           email: normalizedEmail,
           website: website || "",
+          utmSource,
         });
 
         if (result.success) {
