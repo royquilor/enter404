@@ -225,13 +225,6 @@ export async function submitEmail(
         ).catch(() => null);
         const existing = lookupRes?.ok ? await lookupRes.json().catch(() => null) : null;
         if (existing?.id && existing?.unsubscribed) {
-          // Assign to segment if applicable
-          if (formData.utmSource) {
-            const segmentId = getSegmentIdForSource(formData.utmSource);
-            if (segmentId) {
-              await addContactToSegment(existing.id, segmentId, process.env.RESEND_API_KEY!);
-            }
-          }
           // Resend the confirmation email
           const token = generateConfirmToken(normalizedEmail, existing.id);
           const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
@@ -243,6 +236,13 @@ export async function submitEmail(
             subject: "Confirm your subscription to enter404",
             html: buildConfirmationEmail(confirmUrl),
           });
+          // Add to segment after email send — fire and forget
+          if (formData.utmSource) {
+            const segmentId = getSegmentIdForSource(formData.utmSource);
+            if (segmentId) {
+              addContactToSegment(existing.id, segmentId, process.env.RESEND_API_KEY!);
+            }
+          }
         }
         return { success: true };
       }
@@ -258,14 +258,6 @@ export async function submitEmail(
     const contactId = contactData?.id;
     if (!contactId) {
       return { success: false, error: "Failed to submit email. Please try again later." };
-    }
-
-    // Add contact to segment based on utm_source
-    if (formData.utmSource) {
-      const segmentId = getSegmentIdForSource(formData.utmSource);
-      if (segmentId) {
-        await addContactToSegment(contactId, segmentId, process.env.RESEND_API_KEY!);
-      }
     }
 
     // Generate signed confirmation token
@@ -284,8 +276,16 @@ export async function submitEmail(
     if (emailError) {
       return {
         success: false,
-        error: `Email error: ${(emailError as any)?.message ?? (emailError as any)?.name ?? JSON.stringify(emailError)}`,
+        error: "Failed to send confirmation email. Please try again later.",
       };
+    }
+
+    // Add contact to segment after email send — fire and forget (non-blocking)
+    if (formData.utmSource) {
+      const segmentId = getSegmentIdForSource(formData.utmSource);
+      if (segmentId) {
+        addContactToSegment(contactId, segmentId, process.env.RESEND_API_KEY!);
+      }
     }
 
     return { success: true };
