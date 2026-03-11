@@ -4,6 +4,7 @@ import { Resend } from "resend";
 import { validateEmail, normalizeEmail } from "@/lib/validation";
 import { generateConfirmToken, verifyConfirmToken } from "@/lib/token";
 import { headers } from "next/headers";
+import { after } from "next/server";
 import { Redis } from "@upstash/redis";
 
 const kv = new Redis({
@@ -236,11 +237,11 @@ export async function submitEmail(
             subject: "Confirm your subscription to enter404",
             html: buildConfirmationEmail(confirmUrl),
           });
-          // Add to segment after email send — fire and forget
+          // Add to segment after response is sent
           if (formData.utmSource) {
             const segmentId = getSegmentIdForSource(formData.utmSource);
             if (segmentId) {
-              addContactToSegment(existing.id, segmentId, process.env.RESEND_API_KEY!);
+              after(() => addContactToSegment(existing.id, segmentId, process.env.RESEND_API_KEY!));
             }
           }
         }
@@ -280,11 +281,11 @@ export async function submitEmail(
       };
     }
 
-    // Add contact to segment after email send — fire and forget (non-blocking)
+    // Add contact to segment after response is sent — runs after server action returns
     if (formData.utmSource) {
       const segmentId = getSegmentIdForSource(formData.utmSource);
       if (segmentId) {
-        addContactToSegment(contactId, segmentId, process.env.RESEND_API_KEY!);
+        after(() => addContactToSegment(contactId, segmentId, process.env.RESEND_API_KEY!));
       }
     }
 
