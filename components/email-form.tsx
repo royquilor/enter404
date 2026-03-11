@@ -63,7 +63,7 @@ export default function EmailForm() {
   if (isSuccess) {
     return (
       <div className="text-white/90 text-sm">
-        ✓ Check your email to confirm your subscription.
+        ✓ Check your email to confirm your subscription. If you don't see it, check your junk or spam folder.
       </div>
     );
   }
