@@ -23,6 +23,19 @@ function getSegmentIdForSource(utmSource: string): string | undefined {
   return UTM_SEGMENT_MAP[utmSource.toLowerCase()];
 }
 
+async function addContactToSegment(contactId: string, segmentId: string, apiKey: string): Promise<void> {
+  await fetch(`https://api.resend.com/segments/${segmentId}/contacts`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ contactId }),
+  }).catch(() => {
+    // Non-fatal — don't block the signup flow
+  });
+}
+
 function buildConfirmationEmail(confirmUrl: string): string {
   return `
     <!DOCTYPE html>
@@ -207,6 +220,13 @@ export async function submitEmail(
         // Contact already exists — look them up and resend confirmation if still unsubscribed
         const { data: existing } = await resend.contacts.get({ audienceId, email: normalizedEmail });
         if (existing && existing.unsubscribed) {
+          // Assign to segment if applicable
+          if (formData.utmSource) {
+            const segmentId = getSegmentIdForSource(formData.utmSource);
+            if (segmentId) {
+              await addContactToSegment(existing.id, segmentId, process.env.RESEND_API_KEY!);
+            }
+          }
           // Resend the confirmation email
           const token = generateConfirmToken(normalizedEmail, existing.id);
           const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
@@ -239,16 +259,7 @@ export async function submitEmail(
     if (formData.utmSource) {
       const segmentId = getSegmentIdForSource(formData.utmSource);
       if (segmentId) {
-        // Resend SDK doesn't support segments yet — use the REST API directly
-        await fetch(
-          `https://api.resend.com/audiences/${audienceId}/contacts/${contactId}/segments/${segmentId}`,
-          {
-            method: "POST",
-            headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}` },
-          }
-        ).catch(() => {
-          // Non-fatal — don't block the signup flow
-        });
+        await addContactToSegment(contactId, segmentId, process.env.RESEND_API_KEY!);
       }
     }
 
