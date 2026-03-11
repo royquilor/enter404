@@ -19,6 +19,7 @@ A minimal, philosophy-driven landing page for collecting emails from designers a
 - **Styling:** Tailwind CSS
 - **UI Components:** shadcn/ui (Button, Input)
 - **Email Service:** Resend
+- **Rate Limiting:** Vercel KV
 - **Font:** Commit Mono
 
 ## Setup
@@ -57,10 +58,14 @@ cp .env.example .env.local
 
 Required:
 - `RESEND_API_KEY` - Get from [resend.com](https://resend.com/api-keys)
-- `INTERNAL_EMAIL` - Email address to receive signup notifications
+- `RESEND_SEGMENT_ID` - (Recommended) Segment ID in Resend to group subscribers for broadcasts
 
-Optional:
+Optional (for production rate limiting):
+- `KV_REST_API_URL` - Vercel KV REST API URL (auto-set when KV is linked)
+- `KV_REST_API_TOKEN` - Vercel KV REST API token (auto-set when KV is linked)
 - `NEXT_PUBLIC_VIDEO_URL` - Cloudinary video URL for background
+
+**Note:** Rate limiting uses Vercel KV. If not configured, rate limiting is disabled (works for local development). For production, link a Vercel KV database in your Vercel project settings.
 
 ### 5. Run Development Server
 
@@ -110,7 +115,8 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 - The text streaming animation respects `prefers-reduced-motion` and will show text instantly if the user has this preference enabled.
 - The video background falls back to a static image if `prefers-reduced-motion` is enabled or if no video URL is provided.
 - Email submissions are protected by a honeypot field to prevent spam.
-- Rate limiting should be added via Next.js middleware (see PRD for details).
+- Rate limiting is implemented using Vercel KV (3 submissions per IP per hour).
+- Rate limiting gracefully falls back if KV is not configured (for local development).
 
 ## License
 

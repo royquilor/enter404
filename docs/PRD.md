@@ -246,19 +246,20 @@ The page is intentionally minimal. It does not sell a product yet.
 
 ### Technology
 - Next.js Server Actions (no separate API routes)
-- Resend for email delivery
+- Resend Contacts/Segments for subscriber storage
 
 ### Flow
 1. User submits form
 2. Server Action validates email
-3. Server Action sends email via Resend to internal inbox
+3. Server Action stores the email in Resend Contacts
+4. (Optional) Server Action adds the contact to a Resend Segment for broadcasting
 4. Return success/error to client
 5. Client updates UI accordingly
 
 ### Environment Variables
 ```bash
 RESEND_API_KEY=re_xxxxx
-INTERNAL_EMAIL=team@enter404.com
+RESEND_SEGMENT_ID=78261eea-... # optional but recommended
 ```
 
 ### Rate Limiting

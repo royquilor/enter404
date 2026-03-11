@@ -13,6 +13,16 @@ const kv = new Redis({
 
 // Resend client is created only when RESEND_API_KEY is set (avoids crash on load when key is missing)
 
+// UTM source → Resend segment ID mapping
+// Add new entries here as more referral sources are created
+const UTM_SEGMENT_MAP: Record<string, string | undefined> = {
+  clarity: process.env.RESEND_SEGMENT_CLARITY_ID,
+};
+
+function getSegmentIdForSource(utmSource: string): string | undefined {
+  return UTM_SEGMENT_MAP[utmSource.toLowerCase()];
+}
+
 // Rate limit configuration
 const RATE_LIMIT_MAX = 3; // Max 3 submissions
 const RATE_LIMIT_WINDOW = 60 * 60; // 1 hour in seconds (for KV TTL)
@@ -157,7 +167,6 @@ export async function submitEmail(
       email: normalizedEmail,
       unsubscribed: true, // stays unsubscribed until they confirm
       audienceId,
-      ...(formData.utmSource ? { firstName: formData.utmSource } : {}),
     });
 
     if (createContactError) {
@@ -177,6 +186,23 @@ export async function submitEmail(
     const contactId = contactData?.id;
     if (!contactId) {
       return { success: false, error: "Failed to submit email. Please try again later." };
+    }
+
+    // Add contact to segment based on utm_source
+    if (formData.utmSource) {
+      const segmentId = getSegmentIdForSource(formData.utmSource);
+      if (segmentId) {
+        // Resend SDK doesn't support segments yet — use the REST API directly
+        await fetch(
+          `https://api.resend.com/audiences/${audienceId}/contacts/${contactId}/segments/${segmentId}`,
+          {
+            method: "POST",
+            headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}` },
+          }
+        ).catch(() => {
+          // Non-fatal — don't block the signup flow
+        });
+      }
     }
 
     // Generate signed confirmation token
