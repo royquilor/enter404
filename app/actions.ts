@@ -4,7 +4,6 @@ import { Resend } from "resend";
 import { validateEmail, normalizeEmail } from "@/lib/validation";
 import { generateConfirmToken, verifyConfirmToken } from "@/lib/token";
 import { headers } from "next/headers";
-import { after } from "next/server";
 import { Redis } from "@upstash/redis";
 
 const kv = new Redis({
@@ -241,7 +240,8 @@ export async function submitEmail(
           if (formData.utmSource) {
             const segmentId = getSegmentIdForSource(formData.utmSource);
             if (segmentId) {
-              after(() => addContactToSegment(normalizedEmail, segmentId, process.env.RESEND_API_KEY!));
+              await new Promise(r => setTimeout(r, 600));
+              await addContactToSegment(normalizedEmail, segmentId, process.env.RESEND_API_KEY!);
             }
           }
         }
@@ -285,7 +285,8 @@ export async function submitEmail(
     if (formData.utmSource) {
       const segmentId = getSegmentIdForSource(formData.utmSource);
       if (segmentId) {
-        after(() => addContactToSegment(normalizedEmail, segmentId, process.env.RESEND_API_KEY!));
+        await new Promise(r => setTimeout(r, 600));
+        await addContactToSegment(normalizedEmail, segmentId, process.env.RESEND_API_KEY!);
       }
     }
 
