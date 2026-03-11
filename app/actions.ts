@@ -23,6 +23,39 @@ function getSegmentIdForSource(utmSource: string): string | undefined {
   return UTM_SEGMENT_MAP[utmSource.toLowerCase()];
 }
 
+function buildConfirmationEmail(confirmUrl: string): string {
+  return `
+    <!DOCTYPE html>
+    <html>
+      <body style="background:#0a0a0a;color:#fff;font-family:sans-serif;padding:40px;margin:0;">
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td align="center">
+              <table width="480" cellpadding="0" cellspacing="0" style="background:#111;border-radius:8px;padding:40px;">
+                <tr>
+                  <td>
+                    <p style="color:#fff;font-size:13px;margin:0 0 24px;"><a href="https://enter404.com" style="color:#999;text-decoration:none;">enter404.com</a></p>
+                    <h1 style="font-size:24px;font-weight:600;margin:0 0 16px;color:#fff;">Confirm your email</h1>
+                    <p style="color:#fff;font-size:15px;line-height:1.6;margin:0 0 32px;">
+                      Click the button below to confirm your subscription and get notified when we launch.
+                    </p>
+                    <a href="${confirmUrl}" style="display:inline-block;background:#fff;color:#000;font-size:15px;font-weight:600;padding:14px 28px;border-radius:6px;text-decoration:none;">
+                      Confirm my email
+                    </a>
+                    <p style="color:#fff;font-size:12px;margin:32px 0 0;">
+                      This link expires in 24 hours. If you didn't sign up, you can ignore this email.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </body>
+    </html>
+  `;
+}
+
 // Rate limit configuration
 const RATE_LIMIT_MAX = 3; // Max 3 submissions
 const RATE_LIMIT_WINDOW = 60 * 60; // 1 hour in seconds (for KV TTL)
@@ -171,7 +204,21 @@ export async function submitEmail(
 
     if (createContactError) {
       if (looksLikeDuplicateContactError(createContactError)) {
-        // Already signed up — tell them to check their inbox
+        // Contact already exists — look them up and resend confirmation if still unsubscribed
+        const { data: existing } = await resend.contacts.get({ audienceId, email: normalizedEmail });
+        if (existing && existing.unsubscribed) {
+          // Resend the confirmation email
+          const token = generateConfirmToken(normalizedEmail, existing.id);
+          const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+          const confirmUrl = `${baseUrl}/confirm?token=${token}`;
+          const fromEmail = process.env.RESEND_FROM_EMAIL ?? "noreply@enter404.com";
+          await resend.emails.send({
+            from: fromEmail,
+            to: normalizedEmail,
+            subject: "Confirm your subscription to enter404",
+            html: buildConfirmationEmail(confirmUrl),
+          });
+        }
         return { success: true };
       }
       if (process.env.NODE_ENV === "development") {
@@ -215,36 +262,7 @@ export async function submitEmail(
       from: fromEmail,
       to: normalizedEmail,
       subject: "Confirm your subscription to enter404",
-      html: `
-        <!DOCTYPE html>
-        <html>
-          <body style="background:#0a0a0a;color:#fff;font-family:sans-serif;padding:40px;margin:0;">
-            <table width="100%" cellpadding="0" cellspacing="0">
-              <tr>
-                <td align="center">
-                  <table width="480" cellpadding="0" cellspacing="0" style="background:#111;border-radius:8px;padding:40px;">
-                    <tr>
-                      <td>
-                        <p style="color:#fff;font-size:13px;margin:0 0 24px;"><a href="https://enter404.com" style="color:#999;text-decoration:none;">enter404.com</a></p>
-                        <h1 style="font-size:24px;font-weight:600;margin:0 0 16px;color:#fff;">Confirm your email</h1>
-                        <p style="color:#fff;font-size:15px;line-height:1.6;margin:0 0 32px;">
-                          Click the button below to confirm your subscription and get notified when we launch.
-                        </p>
-                        <a href="${confirmUrl}" style="display:inline-block;background:#fff;color:#000;font-size:15px;font-weight:600;padding:14px 28px;border-radius:6px;text-decoration:none;">
-                          Confirm my email
-                        </a>
-                        <p style="color:#fff;font-size:12px;margin:32px 0 0;">
-                          This link expires in 24 hours. If you didn't sign up, you can ignore this email.
-                        </p>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-          </body>
-        </html>
-      `,
+      html: buildConfirmationEmail(confirmUrl),
     });
 
     if (emailError && process.env.NODE_ENV === "development") {
