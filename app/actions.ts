@@ -24,14 +24,14 @@ function getSegmentIdForSource(utmSource: string): string | undefined {
   return UTM_SEGMENT_MAP[utmSource.toLowerCase()];
 }
 
-async function addContactToSegment(contactId: string, segmentId: string, apiKey: string): Promise<void> {
+async function addContactToSegment(email: string, segmentId: string, apiKey: string): Promise<void> {
   await fetch(`https://api.resend.com/segments/${segmentId}/contacts`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${apiKey}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ contactId }),
+    body: JSON.stringify({ email }),
   }).catch(() => {
     // Non-fatal — don't block the signup flow
   });
@@ -241,7 +241,7 @@ export async function submitEmail(
           if (formData.utmSource) {
             const segmentId = getSegmentIdForSource(formData.utmSource);
             if (segmentId) {
-              after(() => addContactToSegment(existing.id, segmentId, process.env.RESEND_API_KEY!));
+              after(() => addContactToSegment(normalizedEmail, segmentId, process.env.RESEND_API_KEY!));
             }
           }
         }
@@ -285,7 +285,7 @@ export async function submitEmail(
     if (formData.utmSource) {
       const segmentId = getSegmentIdForSource(formData.utmSource);
       if (segmentId) {
-        after(() => addContactToSegment(contactId, segmentId, process.env.RESEND_API_KEY!));
+        after(() => addContactToSegment(normalizedEmail, segmentId, process.env.RESEND_API_KEY!));
       }
     }
 
