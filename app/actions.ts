@@ -218,8 +218,13 @@ export async function submitEmail(
     if (createContactError) {
       if (looksLikeDuplicateContactError(createContactError)) {
         // Contact already exists — look them up and resend confirmation if still unsubscribed
-        const { data: existing } = await resend.contacts.get({ audienceId, email: normalizedEmail });
-        if (existing && existing.unsubscribed) {
+        // Use direct fetch with encodeURIComponent to avoid SDK not encoding the '@' in email
+        const lookupRes = await fetch(
+          `https://api.resend.com/audiences/${audienceId}/contacts/${encodeURIComponent(normalizedEmail)}`,
+          { headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}` } }
+        ).catch(() => null);
+        const existing = lookupRes?.ok ? await lookupRes.json().catch(() => null) : null;
+        if (existing?.id && existing?.unsubscribed) {
           // Assign to segment if applicable
           if (formData.utmSource) {
             const segmentId = getSegmentIdForSource(formData.utmSource);
