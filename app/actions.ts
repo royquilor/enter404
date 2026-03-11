@@ -281,8 +281,11 @@ export async function submitEmail(
       html: buildConfirmationEmail(confirmUrl),
     });
 
-    if (emailError && process.env.NODE_ENV === "development") {
-      console.error("Confirmation email error:", emailError);
+    if (emailError) {
+      return {
+        success: false,
+        error: "Failed to send confirmation email. Please try again later.",
+      };
     }
 
     return { success: true };
