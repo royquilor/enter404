@@ -284,7 +284,7 @@ export async function submitEmail(
     if (emailError) {
       return {
         success: false,
-        error: "Failed to send confirmation email. Please try again later.",
+        error: `Email error: ${(emailError as any)?.message ?? (emailError as any)?.name ?? JSON.stringify(emailError)}`,
       };
     }
 
