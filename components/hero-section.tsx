@@ -70,7 +70,7 @@ export default function HeroSection() {
         <div className="text-white/90 text-sm leading-relaxed mb-8 space-y-4 text-balance text-pretty">
           <p className={`${fade} ${headlineComplete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
             <TextStream
-              text="Are you feeling drained from AI? You still love the craft but feel that your process is being smashed."
+              text="Not anti-AI. Not fully AI-native. Just a designer trying to figure out what good work looks like now."
               delay={35}
               mode="word"
               showCursor
@@ -80,7 +80,7 @@ export default function HeroSection() {
           </p>
           <p className={`${fade} ${para1Complete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
             <TextStream
-              text="Enter404 is where I document how designers navigate this new world."
+              text="A running record of figuring it out in the open."
               delay={35}
               mode="word"
               showCursor
@@ -114,7 +114,7 @@ export default function HeroSection() {
         <div className="text-white/90 text-sm leading-relaxed mb-6 space-y-3 text-pretty">
           <p className={`${fade} ${headlineComplete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
             <TextStream
-              text="Are you feeling drained from all this AI? You still love the craft but feel that your process is being smashed."
+              text="Not anti-AI. Not fully AI-native. Just a designer trying to figure out what good work looks like now."
               delay={35}
               mode="word"
               showCursor
@@ -124,7 +124,7 @@ export default function HeroSection() {
           </p>
           <p className={`${fade} ${para1Complete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
             <TextStream
-              text="Enter404 is where I document how designers navigate this new world."
+              text="A running record of figuring it out in the open."
               delay={35}
               mode="word"
               showCursor

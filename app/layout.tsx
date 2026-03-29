@@ -7,14 +7,14 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://enter404.com"),
   title: "Enter404 — You're not lost. You're early.",
   description:
-    "Enter404 is a place for unfinished ideas — before the roadmap, before the polish, before it all makes sense.",
+    "Not anti-AI. Not fully AI-native. Enter404 is for designers figuring out what good work looks like now.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Enter404 — You're not lost. You're early.",
     description:
-      "Enter404 is a place for unfinished ideas — before the roadmap, before the polish, before it all makes sense.",
+      "Not anti-AI. Not fully AI-native. Enter404 is for designers figuring out what good work looks like now.",
     url: "https://enter404.com",
     siteName: "Enter404",
     type: "website",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Enter404 — You're not lost. You're early.",
     description:
-      "Enter404 is a place for unfinished ideas — before the roadmap, before the polish, before it all makes sense.",
+      "Not anti-AI. Not fully AI-native. Enter404 is for designers figuring out what good work looks like now.",
     creator: "@RoyQuilor",
   },
 };
@@ -36,7 +36,7 @@ const jsonLd = {
       "@id": "https://enter404.com/#website",
       "url": "https://enter404.com",
       "name": "Enter404",
-      "description": "Enter404 is a place for unfinished ideas — before the roadmap, before the polish, before it all makes sense.",
+      "description": "Not anti-AI. Not fully AI-native. Enter404 is for designers figuring out what good work looks like now.",
     },
     {
       "@type": "Person",
