@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { CornerDownLeft } from "lucide-react";
 import VideoBackground from "@/components/video-background";
 import EmailForm from "@/components/email-form";
@@ -49,6 +50,9 @@ export default function HeroSection() {
 
   const form = (
     <div className={`${fade} ${showForm ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
+      <p className="text-white/50 text-sm mb-3">
+        Get the write-ups — what broke, what worked, what I&apos;d do differently.
+      </p>
       <EmailForm />
     </div>
   );
@@ -88,6 +92,13 @@ export default function HeroSection() {
               startAnimation={para1Complete}
               onComplete={() => setPara2Complete(true)}
             />
+          </p>
+          <p className={`${fade} ${para2Complete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
+            See a list of{" "}
+            <Link href="/experiments" className="text-white/70 hover:text-white underline underline-offset-2 transition-colors">
+              experiments
+            </Link>
+            .
           </p>
         </div>
 
@@ -132,6 +143,13 @@ export default function HeroSection() {
               startAnimation={para1Complete}
               onComplete={() => setPara2Complete(true)}
             />
+          </p>
+          <p className={`${fade} ${para2Complete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
+            See a list of{" "}
+            <Link href="/experiments" className="text-white/70 hover:text-white underline underline-offset-2 transition-colors">
+              experiments
+            </Link>
+            .
           </p>
         </div>
 

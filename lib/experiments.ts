@@ -21,6 +21,7 @@ export const experiments: Experiment[] = [
     tools: ["Next.js", "Tailwind CSS", "Framer Motion", "shadcn/ui"],
     status: "shipped",
     date: "2025-02",
+    url: "https://presentation.enter404.com",
     teaser:
       "I was tired of rebuilding the same slide deck structure for every project. New Figma file, drag the same boxes, rewrite the same sections. So I built a system where the structure is fixed and the content is just data — one TypeScript file, and the whole deck generates itself.",
   },

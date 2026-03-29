@@ -67,17 +67,29 @@ export default function ExperimentsPage() {
         <ul className="space-y-8">
           {experiments.map((experiment) => (
             <li key={experiment.slug}>
-              <Link
-                href={`/experiments/${experiment.slug}`}
-                className="group block"
-              >
+              <div>
                 <div className="flex items-baseline justify-between gap-4 mb-1">
-                  <span className="text-white text-sm font-medium group-hover:text-white/80 transition-colors">
+                  <Link
+                    href={`/experiments/${experiment.slug}`}
+                    className="text-white text-sm font-medium hover:text-white/80 transition-colors"
+                  >
                     {experiment.title}
-                  </span>
-                  <span className="text-white/30 text-xs shrink-0">
-                    {formatDate(experiment.date)}
-                  </span>
+                  </Link>
+                  <div className="flex items-baseline gap-3 shrink-0">
+                    {experiment.url && (
+                      <a
+                        href={experiment.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white/40 text-xs hover:text-white/70 transition-colors"
+                      >
+                        live ↗
+                      </a>
+                    )}
+                    <span className="text-white/30 text-xs">
+                      {formatDate(experiment.date)}
+                    </span>
+                  </div>
                 </div>
 
                 <p className="text-white/50 text-sm leading-relaxed mb-3">
@@ -97,7 +109,7 @@ export default function ExperimentsPage() {
                     </span>
                   ))}
                 </div>
-              </Link>
+              </div>
             </li>
           ))}
         </ul>
