@@ -7,17 +7,17 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 // TTF paths inside the `geist` package (WOFF2 is not supported by Satori / `next/og`).
-const geistMonoDir = join(
+const geistSansDir = join(
   process.cwd(),
-  "node_modules/geist/dist/fonts/geist-mono"
+  "node_modules/geist/dist/fonts/geist-sans"
 );
 
-const fontFamily = '"Geist Mono", ui-monospace, monospace';
+const fontFamily = '"Geist", ui-sans-serif, system-ui, sans-serif';
 
 export default async function Image() {
   const [fontRegular, fontBold] = await Promise.all([
-    readFile(join(geistMonoDir, "GeistMono-Regular.ttf")),
-    readFile(join(geistMonoDir, "GeistMono-Bold.ttf")),
+    readFile(join(geistSansDir, "Geist-Regular.ttf")),
+    readFile(join(geistSansDir, "Geist-Bold.ttf")),
   ]);
 
   return new ImageResponse(
@@ -108,13 +108,13 @@ export default async function Image() {
       ...size,
       fonts: [
         {
-          name: "Geist Mono",
+          name: "Geist",
           data: fontRegular,
           weight: 400,
           style: "normal",
         },
         {
-          name: "Geist Mono",
+          name: "Geist",
           data: fontBold,
           weight: 700,
           style: "normal",

@@ -1,14 +1,15 @@
 "use client";
 
-import { useState, useTransition, useEffect } from "react";
+import { useState, useTransition, useEffect, useRef } from "react";
+import { Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { validateEmail, normalizeEmail } from "@/lib/validation";
 import { submitEmail } from "@/app/actions";
 
 /**
- * Email capture form component
- * Handles client-side validation and submission
+ * Email capture form: client validation, server action, accessible errors and loading state.
+ * Follows AGENTS.md: 16px+ inputs on mobile, autocomplete, no paste blocking, spinner + label, submit disabled only while pending.
  */
 export default function EmailForm() {
   const [email, setEmail] = useState("");
@@ -17,6 +18,7 @@ export default function EmailForm() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [successVisible, setSuccessVisible] = useState(false);
   const [utmSource, setUtmSource] = useState<string | undefined>(undefined);
+  const emailInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -30,14 +32,13 @@ export default function EmailForm() {
     e.preventDefault();
     setError("");
 
-    // Client-side validation
     const normalizedEmail = normalizeEmail(email);
     if (!validateEmail(normalizedEmail)) {
       setError("Please enter a valid email address");
+      emailInputRef.current?.focus();
       return;
     }
 
-    // Get honeypot value (hidden field)
     const formData = new FormData(e.currentTarget);
     const website = formData.get("website") as string;
 
@@ -55,9 +56,11 @@ export default function EmailForm() {
           requestAnimationFrame(() => setSuccessVisible(true));
         } else {
           setError(result.error || "Something went wrong. Please try again.");
+          emailInputRef.current?.focus();
         }
-      } catch (err) {
+      } catch {
         setError("Something went wrong. Please try again.");
+        emailInputRef.current?.focus();
       }
     });
   };
@@ -65,7 +68,9 @@ export default function EmailForm() {
   if (isSuccess) {
     return (
       <div
-        className={`text-white/90 text-sm transition-[opacity,transform] duration-300 ease-out ${
+        role="status"
+        aria-live="polite"
+        className={`text-white/90 text-sm transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${
           successVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
         }`}
       >
@@ -76,7 +81,7 @@ export default function EmailForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
-      {/* Honeypot field - hidden from users but visible to bots */}
+      {/* Honeypot — hidden from users; tabIndex -1 keeps it out of tab order (AGENTS: focus order). */}
       <input
         id="website"
         type="text"
@@ -94,22 +99,27 @@ export default function EmailForm() {
         aria-hidden="true"
       />
 
-      <div className="flex-1">
+      <div className="flex-1 min-w-0">
         <Input
+          ref={emailInputRef}
           id="email"
           name="email"
           type="email"
-          placeholder="Your email"
+          inputMode="email"
+          autoComplete="email"
+          spellCheck={false}
+          placeholder="you@example.com…"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={isPending}
           maxLength={254}
-          className="bg-transparent border-white/30 text-white placeholder:text-white/50 focus-visible:ring-white/50"
+          className="bg-transparent border-white/30 text-white text-base min-h-11 sm:min-h-9 sm:text-sm placeholder:text-white/50 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
           aria-label="Email address"
-          required
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? "email-error" : undefined}
         />
         {error && (
-          <p className="text-red-300 text-sm mt-1" role="alert">
+          <p id="email-error" className="text-red-300 text-sm mt-1" role="alert">
             {error}
           </p>
         )}
@@ -117,13 +127,24 @@ export default function EmailForm() {
 
       <Button
         type="submit"
-        disabled={isPending || !email.trim()}
-        className="bg-white/10 text-white border-white/30 hover:bg-white/20 active:scale-[0.97] transition-transform disabled:opacity-50"
-        aria-label="Submit email"
+        disabled={isPending}
+        className="bg-white/10 text-white border border-white/30 hover:bg-white/20 active:scale-[0.97] transition-transform disabled:opacity-50 min-h-11 min-w-[44px] sm:min-h-9 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
+        aria-label={
+          isPending ? "Submitting, please wait" : "Submit your email to subscribe"
+        }
       >
-        {isPending ? "Joining..." : "Join the explorers"}
+        {isPending ? (
+          <>
+            <Loader2
+              className="mr-2 h-4 w-4 shrink-0 animate-spin motion-reduce:animate-none opacity-90"
+              aria-hidden={true}
+            />
+            <span>Enter</span>
+          </>
+        ) : (
+          "Enter"
+        )}
       </Button>
     </form>
   );
 }
-

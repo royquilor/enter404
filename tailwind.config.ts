@@ -52,10 +52,13 @@ const config: Config = {
   			}
   		},
   		fontFamily: {
-  			mono: [
-  				'var(--font-geist-mono)',
-  				'monospace'
-  			]
+  			sans: [
+  				'var(--font-inter)',
+  				'ui-sans-serif',
+  				'system-ui',
+  				'sans-serif'
+  			],
+  			mono: ['ui-monospace', 'monospace']
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

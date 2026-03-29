@@ -31,7 +31,9 @@ export default function HeroSection() {
     }
   }, [para2Complete]);
 
-  const fade = "transition-[opacity,transform] duration-300 ease-out";
+  /* motion-reduce: instant state changes (AGENTS: honor prefers-reduced-motion). */
+  const fade =
+    "transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none motion-reduce:duration-0";
 
   const signature = (
     <div className={`flex ${isMobile ? "justify-center" : ""} items-center gap-3 mb-8 ${fade} ${showSignature ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
@@ -41,9 +43,25 @@ export default function HeroSection() {
       </Avatar>
       <span className="text-white/60 text-sm">
         Roy Quilor{" "}
-        <a href="https://x.com/RoyQuilor" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors px-1 -mx-1">X ↗</a>
+        <a
+          href="https://x.com/RoyQuilor"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white/50 hover:text-white transition-colors px-1 -mx-1 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
+          aria-label="Roy Quilor on X (opens in new tab)"
+        >
+          X ↗
+        </a>
         {" · "}
-        <a href="https://www.youtube.com/@404roy" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors px-1 -mx-1">YouTube ↗</a>
+        <a
+          href="https://www.youtube.com/@404roy"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white/50 hover:text-white transition-colors px-1 -mx-1 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
+          aria-label="Roy Quilor on YouTube (opens in new tab)"
+        >
+          YouTube ↗
+        </a>
       </span>
     </div>
   );
@@ -62,7 +80,7 @@ export default function HeroSection() {
       <div className="relative z-10 text-white/50 text-sm px-6 py-6 flex items-center gap-1"><CornerDownLeft size={12} />404</div>
 
       <div className="relative z-10 max-w-sm px-6 py-6">
-        <h1 className="text-white text-sm font-mono font-medium tracking-wide mb-8 leading-tight">
+        <h1 className="text-white text-sm font-sans font-medium tracking-wide mb-8 leading-tight">
           <TextStream
             text="Design inside the chaos."
             delay={60}
@@ -72,7 +90,7 @@ export default function HeroSection() {
           />
         </h1>
 
-        <div className="text-white/90 text-sm leading-relaxed mb-8 space-y-4 text-balance text-pretty">
+        <div className="text-white/90 text-sm leading-relaxed mb-8 space-y-4 text-pretty">
           <p className={`${fade} ${headlineComplete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
             <TextStream
               text="Not anti-AI. Not fully AI-native. Just a designer trying to figure out what good work looks like now."
@@ -95,7 +113,10 @@ export default function HeroSection() {
           </p>
           <p className={`${fade} ${para2Complete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
             See a list of{" "}
-            <Link href="/experiments" className="text-white/70 hover:text-white underline underline-offset-2 transition-colors">
+            <Link
+              href="/experiments"
+              className="text-white/70 hover:text-white underline underline-offset-2 transition-colors rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
+            >
               experiments
             </Link>
             .
@@ -113,7 +134,7 @@ export default function HeroSection() {
       <div className="text-white/50 text-sm mt-8 ml-8 flex items-center gap-1"><CornerDownLeft size={12} />404</div>
 
       <div className="relative z-10 px-6 py-24 text-center">
-        <h1 className="text-white text-sm font-mono font-medium tracking-wide mb-6 leading-tight">
+        <h1 className="text-white text-sm font-sans font-medium tracking-wide mb-6 leading-tight">
           <TextStream
             text="Design inside the chaos."
             delay={60}
@@ -146,7 +167,10 @@ export default function HeroSection() {
           </p>
           <p className={`${fade} ${para2Complete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
             See a list of{" "}
-            <Link href="/experiments" className="text-white/70 hover:text-white underline underline-offset-2 transition-colors">
+            <Link
+              href="/experiments"
+              className="text-white/70 hover:text-white underline underline-offset-2 transition-colors rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
+            >
               experiments
             </Link>
             .

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CornerDownLeft } from "lucide-react";
-import { experiments, type ExperimentStatus } from "@/lib/experiments";
+import { experiments } from "@/lib/experiments";
 
 export const metadata: Metadata = {
   title: "Experiments — Enter404",
@@ -16,18 +16,6 @@ export const metadata: Metadata = {
   },
 };
 
-const statusLabel: Record<ExperimentStatus, string> = {
-  shipped: "shipped",
-  ongoing: "ongoing",
-  abandoned: "abandoned",
-};
-
-const statusColor: Record<ExperimentStatus, string> = {
-  shipped: "text-emerald-400",
-  ongoing: "text-amber-400",
-  abandoned: "text-white/30",
-};
-
 function formatDate(date: string) {
   const [year, month] = date.split("-");
   return new Date(Number(year), Number(month) - 1).toLocaleDateString("en-US", {
@@ -38,7 +26,11 @@ function formatDate(date: string) {
 
 export default function ExperimentsPage() {
   return (
-    <main className="min-h-screen bg-[#0a0a0a] px-6 py-10 font-mono">
+    <main
+      id="main-content"
+      className="min-h-screen bg-[#0a0a0a] px-6 py-10 font-sans"
+      tabIndex={-1}
+    >
       <div className="max-w-xl mx-auto">
 
         {/* Nav */}
@@ -81,7 +73,8 @@ export default function ExperimentsPage() {
                         href={experiment.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white/40 text-xs hover:text-white/70 transition-colors"
+                        className="text-white/40 text-xs hover:text-white/70 transition-colors rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50"
+                        aria-label={`Open ${experiment.title} live site (opens in new tab)`}
                       >
                         live ↗
                       </a>
@@ -92,23 +85,9 @@ export default function ExperimentsPage() {
                   </div>
                 </div>
 
-                <p className="text-white/50 text-sm leading-relaxed mb-3">
+                <p className="text-white/50 text-sm leading-relaxed">
                   {experiment.description}
                 </p>
-
-                <div className="flex items-center gap-3 flex-wrap">
-                  <span className={`text-xs ${statusColor[experiment.status]}`}>
-                    ● {statusLabel[experiment.status]}
-                  </span>
-                  {experiment.tools.map((tool) => (
-                    <span
-                      key={tool}
-                      className="text-white/25 text-xs border border-white/10 px-2 py-0.5 rounded-sm"
-                    >
-                      {tool}
-                    </span>
-                  ))}
-                </div>
               </div>
             </li>
           ))}

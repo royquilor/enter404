@@ -29,13 +29,25 @@ export default async function ConfirmPage({ searchParams }: Props) {
 
 function ConfirmLayout({ message, success }: { message: string; success: boolean }) {
   return (
-    <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4">
-      <div className="text-center">
-        <p className="text-2xl font-semibold text-white mb-2">
+    <main
+      id="main-content"
+      className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4"
+      tabIndex={-1}
+    >
+      <div className="text-center max-w-md">
+        <p className="text-2xl font-semibold text-white mb-2" aria-hidden="true">
           {success ? "✓" : "✕"}
         </p>
-        <p className="text-white/70 text-base">{message}</p>
-        <Link href="/" className="mt-8 inline-block text-sm text-white/40 hover:text-white/70 transition-colors">
+        <h1 className="sr-only">
+          {success ? "Subscription confirmed" : "Confirmation could not be completed"}
+        </h1>
+        <p className="text-white/70 text-base" role="status">
+          {message}
+        </p>
+        <Link
+          href="/"
+          className="mt-8 inline-block text-sm text-white/40 hover:text-white/70 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60 rounded-sm"
+        >
           ← Back to enter404.com
         </Link>
       </div>

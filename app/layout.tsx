@@ -1,7 +1,19 @@
-import type { Metadata } from "next";
-import { GeistMono } from "geist/font/mono";
+import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+/** Browser chrome / PWA status bar; matches primary dark surfaces (hero, experiments). */
+export const viewport: Viewport = {
+  themeColor: "#0a0a0a",
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://enter404.com"),
@@ -58,8 +70,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${GeistMono.variable} font-mono antialiased`}>
+    <html lang="en" className={inter.variable}>
+      <body className="font-sans antialiased">
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
