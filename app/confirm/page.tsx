@@ -41,12 +41,12 @@ function ConfirmLayout({ message, success }: { message: string; success: boolean
         <h1 className="sr-only">
           {success ? "Subscription confirmed" : "Confirmation could not be completed"}
         </h1>
-        <p className="text-white/70 text-base" role="status">
+        <p className="text-white/70 text-base text-pretty" role="status">
           {message}
         </p>
         <Link
           href="/"
-          className="mt-8 inline-block text-sm text-white/40 hover:text-white/70 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60 rounded-sm"
+          className="mt-8 inline-block text-sm text-white/40 hover:text-white/70 transition-[color] duration-200 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60 rounded-sm"
         >
           ← Back to enter404.com
         </Link>

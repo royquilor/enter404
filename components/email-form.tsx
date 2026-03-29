@@ -70,7 +70,7 @@ export default function EmailForm() {
       <div
         role="status"
         aria-live="polite"
-        className={`text-white/90 text-sm transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${
+        className={`text-white/90 text-sm text-pretty transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${
           successVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
         }`}
       >
@@ -113,7 +113,7 @@ export default function EmailForm() {
           onChange={(e) => setEmail(e.target.value)}
           disabled={isPending}
           maxLength={254}
-          className="bg-transparent border-white/30 text-white text-base min-h-11 sm:min-h-9 sm:text-sm placeholder:text-white/50 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+          className="bg-transparent border-white/30 text-white text-base min-h-11 sm:min-h-9 sm:text-sm placeholder:text-white/50 transition-[border-color,box-shadow] duration-150 ease-out focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
           aria-label="Email address"
           aria-invalid={error ? true : undefined}
           aria-describedby={error ? "email-error" : undefined}
@@ -128,7 +128,7 @@ export default function EmailForm() {
       <Button
         type="submit"
         disabled={isPending}
-        className="bg-white/10 text-white border border-white/30 hover:bg-white/20 active:scale-[0.97] transition-transform disabled:opacity-50 min-h-11 min-w-[44px] sm:min-h-9 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
+        className="bg-white/10 text-white border border-white/30 hover:bg-white/20 active:scale-[0.96] transition-[transform,background-color] duration-150 ease-out disabled:opacity-50 min-h-11 min-w-[44px] sm:min-h-9 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
         aria-label={
           isPending ? "Submitting, please wait" : "Submit your email to subscribe"
         }

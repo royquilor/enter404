@@ -56,15 +56,17 @@ export default async function ExperimentPage({ params }: Props) {
         <div className="flex items-center gap-4 mb-12">
           <Link
             href="/"
-            className="text-white/35 text-sm hover:text-white/70 transition-colors flex items-center gap-1"
+            className="text-white/35 text-sm hover:text-white/70 transition-[color] duration-200 ease-out flex items-center gap-1"
           >
-            <CornerDownLeft size={12} />
+            <span className="inline-flex shrink-0 relative top-px" aria-hidden={true}>
+              <CornerDownLeft size={12} />
+            </span>
             404
           </Link>
           <span className="text-white/15 text-sm">/</span>
           <Link
             href="/experiments"
-            className="text-white/35 text-sm hover:text-white/70 transition-colors"
+            className="text-white/35 text-sm hover:text-white/70 transition-[color] duration-200 ease-out"
           >
             experiments
           </Link>
@@ -72,12 +74,12 @@ export default async function ExperimentPage({ params }: Props) {
 
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-white text-sm font-medium tracking-wide mb-4">
+          <h1 className="text-white text-sm font-medium tracking-wide mb-4 text-balance">
             {experiment.title}
           </h1>
 
           <div className="flex items-center gap-4 flex-wrap">
-            <span className="text-white/30 text-xs">
+            <span className="text-white/30 text-xs tabular-nums">
               {formatDate(experiment.date)}
             </span>
             {experiment.url && (
@@ -85,7 +87,7 @@ export default async function ExperimentPage({ params }: Props) {
                 href={experiment.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/40 text-xs hover:text-white/70 transition-colors rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50"
+                className="text-white/40 text-xs hover:text-white/70 transition-[color] duration-200 ease-out rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50"
                 aria-label={`Open ${experiment.title} live site (opens in new tab)`}
               >
                 live ↗
@@ -95,20 +97,20 @@ export default async function ExperimentPage({ params }: Props) {
         </div>
 
         {/* Description */}
-        <p className="text-white/70 text-sm leading-relaxed mb-8">
+        <p className="text-white/70 text-sm leading-relaxed text-pretty mb-8">
           {experiment.description}
         </p>
 
         {/* Teaser */}
         <div className="border-l border-white/10 pl-4 mb-10">
-          <p className="text-white/50 text-sm leading-relaxed">
+          <p className="text-white/50 text-sm leading-relaxed text-pretty">
             {experiment.teaser}
           </p>
         </div>
 
-        {/* Gated CTA */}
-        <div className="border border-white/10 rounded-sm p-5">
-          <p className="text-white/60 text-sm mb-4">
+        {/* Gated CTA: layered shadow + hairline border (make-interfaces-feel-better). */}
+        <div className="rounded-md border border-white/10 bg-white/[0.02] p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_12px_40px_-10px_rgba(0,0,0,0.55)]">
+          <p className="text-white/60 text-sm mb-4 text-pretty">
             The full write-up — what broke, what surprised me, and what I&apos;d
             do differently — is in the Enter404 newsletter.
           </p>

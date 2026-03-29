@@ -88,6 +88,12 @@
     scroll-margin-top: 1.5rem;
   }
 
+  /* Narrow headings: more even line lengths (make-interfaces-feel-better). */
+  h1,
+  h2 {
+    text-wrap: balance;
+  }
+
   /**
    * Skip link: hidden until keyboard focus (AGENTS: skip to content).
    * Uses :focus so it works for all focus modes, not only :focus-visible.

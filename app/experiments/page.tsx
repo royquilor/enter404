@@ -37,19 +37,21 @@ export default function ExperimentsPage() {
         <div className="mb-12">
           <Link
             href="/"
-            className="text-white/35 text-sm hover:text-white/70 transition-colors flex items-center gap-1"
+            className="text-white/35 text-sm hover:text-white/70 transition-[color] duration-200 ease-out flex items-center gap-1"
           >
-            <CornerDownLeft size={12} />
+            <span className="inline-flex shrink-0 relative top-px" aria-hidden={true}>
+              <CornerDownLeft size={12} />
+            </span>
             404
           </Link>
         </div>
 
         {/* Header */}
         <div className="mb-10">
-          <h1 className="text-white text-sm font-medium tracking-wide mb-3">
+          <h1 className="text-white text-sm font-medium tracking-wide mb-3 text-balance">
             Experiments
           </h1>
-          <p className="text-white/50 text-sm leading-relaxed">
+          <p className="text-white/50 text-sm leading-relaxed text-pretty">
             Apps, tools, and workflows I&apos;ve shipped while figuring it out
             in the open. Subscribe for the honest write-up behind each one.
           </p>
@@ -63,7 +65,7 @@ export default function ExperimentsPage() {
                 <div className="flex items-baseline justify-between gap-4 mb-1">
                   <Link
                     href={`/experiments/${experiment.slug}`}
-                    className="text-white text-sm font-medium hover:text-white/80 transition-colors"
+                    className="text-white text-sm font-medium hover:text-white/80 transition-[color] duration-200 ease-out"
                   >
                     {experiment.title}
                   </Link>
@@ -73,19 +75,19 @@ export default function ExperimentsPage() {
                         href={experiment.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white/40 text-xs hover:text-white/70 transition-colors rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50"
+                        className="text-white/40 text-xs hover:text-white/70 transition-[color] duration-200 ease-out rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50"
                         aria-label={`Open ${experiment.title} live site (opens in new tab)`}
                       >
                         live ↗
                       </a>
                     )}
-                    <span className="text-white/30 text-xs">
+                    <span className="text-white/30 text-xs tabular-nums">
                       {formatDate(experiment.date)}
                     </span>
                   </div>
                 </div>
 
-                <p className="text-white/50 text-sm leading-relaxed">
+                <p className="text-white/50 text-sm leading-relaxed text-pretty">
                   {experiment.description}
                 </p>
               </div>
