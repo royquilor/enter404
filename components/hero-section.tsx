@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { CornerDownLeft } from "lucide-react";
 import VideoBackground from "@/components/video-background";
 import EmailForm from "@/components/email-form";
 import TextStream from "@/components/text-stream";
@@ -54,7 +55,7 @@ export default function HeroSection() {
 
   const desktopContent = (
     <>
-      <div className="relative z-10 text-white text-sm px-6 py-6">⏎404</div>
+      <div className="relative z-10 text-white/50 text-sm px-6 py-6 flex items-center gap-1"><CornerDownLeft size={12} />404</div>
 
       <div className="relative z-10 max-w-sm px-6 py-6">
         <h1 className="text-white text-sm font-mono font-medium tracking-wide mb-8 leading-tight">
@@ -98,7 +99,7 @@ export default function HeroSection() {
 
   const mobileContent = (
     <>
-      <div className="text-white text-sm mt-8 ml-8">⏎404</div>
+      <div className="text-white/50 text-sm mt-8 ml-8 flex items-center gap-1"><CornerDownLeft size={12} />404</div>
 
       <div className="relative z-10 px-6 py-24 text-center">
         <h1 className="text-white text-sm font-mono font-medium tracking-wide mb-6 leading-tight">

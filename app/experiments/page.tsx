@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CornerDownLeft } from "lucide-react";
 import { experiments, type ExperimentStatus } from "@/lib/experiments";
 
 export const metadata: Metadata = {
@@ -44,9 +45,10 @@ export default function ExperimentsPage() {
         <div className="mb-12">
           <Link
             href="/"
-            className="text-white/35 text-sm hover:text-white/70 transition-colors"
+            className="text-white/35 text-sm hover:text-white/70 transition-colors flex items-center gap-1"
           >
-            ⏎404
+            <CornerDownLeft size={12} />
+            404
           </Link>
         </div>
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CornerDownLeft } from "lucide-react";
 import { experiments, getExperiment, type ExperimentStatus } from "@/lib/experiments";
 import EmailForm from "@/components/email-form";
 
@@ -63,9 +64,10 @@ export default async function ExperimentPage({ params }: Props) {
         <div className="flex items-center gap-4 mb-12">
           <Link
             href="/"
-            className="text-white/35 text-sm hover:text-white/70 transition-colors"
+            className="text-white/35 text-sm hover:text-white/70 transition-colors flex items-center gap-1"
           >
-            ⏎404
+            <CornerDownLeft size={12} />
+            404
           </Link>
           <span className="text-white/15 text-sm">/</span>
           <Link
