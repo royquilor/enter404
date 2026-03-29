@@ -1,12 +1,5 @@
-# Fonts Directory
+# Fonts directory
 
-## Commit Mono Variable Font
+Site typography uses **Geist Mono** from the [`geist`](https://www.npmjs.com/package/geist) package (`geist/font/mono`), not files in this folder.
 
-The **Commit Mono Variable Font** is already in place:
-
-- `CommitMono VariableFont.woff2`
-
-Variable fonts support multiple weights and styles in a single file, providing better performance and flexibility.
-
-You can download Commit Mono from [commitmono.com](https://commitmono.com).
-
+Add optional local font assets here if you need them later.

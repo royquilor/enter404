@@ -20,7 +20,7 @@ A minimal, philosophy-driven landing page for collecting emails from designers a
 - **UI Components:** shadcn/ui (Button, Input)
 - **Email Service:** Resend
 - **Rate Limiting:** Vercel KV
-- **Font:** Commit Mono
+- **Font:** Geist Mono (`geist`)
 
 ## Setup
 
@@ -30,16 +30,7 @@ A minimal, philosophy-driven landing page for collecting emails from designers a
 npm install
 ```
 
-### 2. Add Font File
-
-Download **Commit Mono Regular** and place it in:
-```
-/public/fonts/CommitMono-Regular.woff2
-```
-
-You can download Commit Mono from [commitmono.com](https://commitmono.com) or use a similar monospace font.
-
-### 3. Add Fallback Image
+### 2. Add Fallback Image
 
 Add a fallback poster image for the video background:
 ```
@@ -48,7 +39,7 @@ Add a fallback poster image for the video background:
 
 This should be a static image of the door scene (1920x1080 recommended).
 
-### 4. Configure Environment Variables
+### 3. Configure Environment Variables
 
 Copy `.env.example` to `.env.local` and fill in your values:
 
@@ -67,7 +58,7 @@ Optional (for production rate limiting):
 
 **Note:** Rate limiting uses Vercel KV. If not configured, rate limiting is disabled (works for local development). For production, link a Vercel KV database in your Vercel project settings.
 
-### 5. Run Development Server
+### 4. Run Development Server
 
 ```bash
 npm run dev
@@ -97,7 +88,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
   /utils.ts              # shadcn utils
   /validation.ts         # Email validation
 /public
-  /fonts                 # Commit Mono font file
+  /fonts                 # Optional local font assets (Geist Mono via npm)
   /images                # Fallback poster image
 ```
 

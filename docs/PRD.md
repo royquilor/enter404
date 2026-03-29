@@ -172,7 +172,7 @@ The page is intentionally minimal. It does not sell a product yet.
 - Custom text streaming component
 
 ### Font
-- **Commit Mono** (loaded via `next/font/local`)
+- **Geist Mono** (loaded via `geist/font/mono`)
 - Preload font to prevent FOUC
 - Font files in `/public/fonts/`
 
@@ -485,8 +485,7 @@ This page is the door, not the building.
   /utils.ts                    # shadcn utils
   /validation.ts               # Email validation
 /public
-  /fonts
-    /CommitMono-Regular.woff2
+  /fonts                     # Optional; Geist Mono ships via `geist` npm package
   /images
     /door-fallback.jpg         # Video poster
 /styles
@@ -500,7 +499,7 @@ This page is the door, not the building.
 ### Phase 1: Foundation (Day 1)
 - [ ] Initialize Next.js project
 - [ ] Install shadcn/ui (Button, Input)
-- [ ] Add Commit Mono font
+- [ ] Add Geist Mono (`geist` package)
 - [ ] Set up Tailwind config
 - [ ] Create basic page layout
 

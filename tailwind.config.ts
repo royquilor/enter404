@@ -53,7 +53,7 @@ const config: Config = {
   		},
   		fontFamily: {
   			mono: [
-  				'var(--font-commit-mono)',
+  				'var(--font-geist-mono)',
   				'monospace'
   			]
   		},
