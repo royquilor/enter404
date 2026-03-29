@@ -19,6 +19,13 @@ interface UseTextStreamOptions {
    * Streaming mode: 'char' for character-by-character, 'word' for word-by-word
    */
   mode?: 'char' | 'word';
+  /**
+   * Whether to start the animation. Defaults to true.
+   * Set to false to defer animation (e.g. for cascaded reveals).
+   * The full text is rendered immediately for SSR/crawlers; animation
+   * begins once this switches to true.
+   */
+  startAnimation?: boolean;
 }
 
 /**
@@ -31,8 +38,10 @@ export function useTextStream(
   text: string,
   options: UseTextStreamOptions = {}
 ): { displayedText: string; isComplete: boolean } {
-  const { delay = 30, respectReducedMotion = true, onComplete, mode = 'char' } = options;
-  const [displayedText, setDisplayedText] = useState("");
+  const { delay = 30, respectReducedMotion = true, onComplete, mode = 'char', startAnimation = true } = options;
+  // Initialize with full text so SSR/initial HTML contains all content for crawlers.
+  // The animation resets this to "" once it starts running on the client.
+  const [displayedText, setDisplayedText] = useState(text);
   const [isComplete, setIsComplete] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const onCompleteRef = useRef(onComplete);
@@ -43,6 +52,13 @@ export function useTextStream(
     onCompleteRef.current = onComplete;
     // Reset completion flag when text changes
     hasCalledCompleteRef.current = false;
+
+    // Not yet triggered — hold full text visible, no cursor
+    if (!startAnimation) {
+      setDisplayedText(text);
+      setIsComplete(true);
+      return;
+    }
 
     // Check for reduced motion preference
     if (respectReducedMotion) {
@@ -58,7 +74,7 @@ export function useTextStream(
       }
     }
 
-    // Reset state when text changes
+    // Reset state and begin animation
     setDisplayedText("");
     setIsComplete(false);
 
@@ -120,7 +136,7 @@ export function useTextStream(
         clearTimeout(startTimeout);
       };
     }
-  }, [text, delay, respectReducedMotion, mode]);
+  }, [text, delay, respectReducedMotion, mode, startAnimation]);
 
   return { displayedText, isComplete };
 }

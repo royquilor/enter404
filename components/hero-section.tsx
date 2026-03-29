@@ -69,26 +69,24 @@ export default function HeroSection() {
 
         <div className="text-white/90 text-sm leading-relaxed mb-8 space-y-4 text-balance text-pretty">
           <p className={`${fade} ${headlineComplete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
-            {headlineComplete && (
-              <TextStream
-                text="Are you feeling drained from AI? You still love the craft but feel that your process is being smashed."
-                delay={35}
-                mode="word"
-                showCursor
-                onComplete={() => setPara1Complete(true)}
-              />
-            )}
+            <TextStream
+              text="Are you feeling drained from AI? You still love the craft but feel that your process is being smashed."
+              delay={35}
+              mode="word"
+              showCursor
+              startAnimation={headlineComplete}
+              onComplete={() => setPara1Complete(true)}
+            />
           </p>
           <p className={`${fade} ${para1Complete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
-            {para1Complete && (
-              <TextStream
-                text="Enter404 is where I document how designers navigate this new world."
-                delay={35}
-                mode="word"
-                showCursor
-                onComplete={() => setPara2Complete(true)}
-              />
-            )}
+            <TextStream
+              text="Enter404 is where I document how designers navigate this new world."
+              delay={35}
+              mode="word"
+              showCursor
+              startAnimation={para1Complete}
+              onComplete={() => setPara2Complete(true)}
+            />
           </p>
         </div>
 
@@ -115,26 +113,24 @@ export default function HeroSection() {
 
         <div className="text-white/90 text-sm leading-relaxed mb-6 space-y-3 text-pretty">
           <p className={`${fade} ${headlineComplete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
-            {headlineComplete && (
-              <TextStream
-                text="Are you feeling drained from all this AI? You still love the craft but feel that your process is being smashed."
-                delay={35}
-                mode="word"
-                showCursor
-                onComplete={() => setPara1Complete(true)}
-              />
-            )}
+            <TextStream
+              text="Are you feeling drained from all this AI? You still love the craft but feel that your process is being smashed."
+              delay={35}
+              mode="word"
+              showCursor
+              startAnimation={headlineComplete}
+              onComplete={() => setPara1Complete(true)}
+            />
           </p>
           <p className={`${fade} ${para1Complete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
-            {para1Complete && (
-              <TextStream
-                text="Enter404 is where I document how designers navigate this new world."
-                delay={35}
-                mode="word"
-                showCursor
-                onComplete={() => setPara2Complete(true)}
-              />
-            )}
+            <TextStream
+              text="Enter404 is where I document how designers navigate this new world."
+              delay={35}
+              mode="word"
+              showCursor
+              startAnimation={para1Complete}
+              onComplete={() => setPara2Complete(true)}
+            />
           </p>
         </div>
 

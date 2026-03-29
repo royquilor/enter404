@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { confirmEmail } from "@/app/actions";
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 interface Props {
   searchParams: Promise<{ token?: string }>;

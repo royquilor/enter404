@@ -9,6 +9,7 @@ interface TextStreamProps {
   onComplete?: () => void;
   mode?: "char" | "word";
   showCursor?: boolean;
+  startAnimation?: boolean;
 }
 
 export default function TextStream({
@@ -18,8 +19,9 @@ export default function TextStream({
   onComplete,
   mode = "word",
   showCursor = false,
+  startAnimation = true,
 }: TextStreamProps) {
-  const { displayedText, isComplete } = useTextStream(text, { delay, onComplete, mode });
+  const { displayedText, isComplete } = useTextStream(text, { delay, onComplete, mode, startAnimation });
 
   return (
     <span className={className} aria-live="polite" aria-label={text}>
