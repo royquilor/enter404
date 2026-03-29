@@ -29,25 +29,25 @@ export default function HeroSection() {
     }
   }, [para2Complete]);
 
-  const fade = "transition-opacity duration-500";
+  const fade = "transition-[opacity,transform] duration-300 ease-out";
 
   const signature = (
-    <div className={`flex ${isMobile ? "justify-center" : ""} items-center gap-3 mb-8 ${fade} ${showSignature ? "opacity-100" : "opacity-0"}`}>
-      <Avatar className="h-8 w-8">
+    <div className={`flex ${isMobile ? "justify-center" : ""} items-center gap-3 mb-8 ${fade} ${showSignature ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
+      <Avatar className="h-8 w-8 outline outline-1 outline-white/10">
         <AvatarImage src="https://avatars.githubusercontent.com/u/2366186?v=4" alt="Roy Quilor" />
         <AvatarFallback>R</AvatarFallback>
       </Avatar>
       <span className="text-white/60 text-sm">
         Roy Quilor{" "}
-        <a href="https://x.com/RoyQuilor" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">X ↗</a>
+        <a href="https://x.com/RoyQuilor" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors px-1 -mx-1">X ↗</a>
         {" · "}
-        <a href="https://www.youtube.com/@404roy" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">YouTube ↗</a>
+        <a href="https://www.youtube.com/@404roy" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors px-1 -mx-1">YouTube ↗</a>
       </span>
     </div>
   );
 
   const form = (
-    <div className={`${fade} ${showForm ? "opacity-100" : "opacity-0"}`}>
+    <div className={`${fade} ${showForm ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
       <EmailForm />
     </div>
   );
@@ -57,7 +57,7 @@ export default function HeroSection() {
       <div className="relative z-10 text-white text-sm px-6 py-6">⏎404</div>
 
       <div className="relative z-10 max-w-sm px-6 py-6">
-        <h1 className="text-white text-sm font-mono mb-8 leading-tight">
+        <h1 className="text-white text-sm font-mono font-medium tracking-wide mb-8 leading-tight">
           <TextStream
             text="Design inside the chaos."
             delay={60}
@@ -67,8 +67,8 @@ export default function HeroSection() {
           />
         </h1>
 
-        <div className="text-white/90 text-sm mb-8 space-y-4 text-balance">
-          <p className={`${fade} ${headlineComplete ? "opacity-100" : "opacity-0"}`}>
+        <div className="text-white/90 text-sm leading-relaxed mb-8 space-y-4 text-balance text-pretty">
+          <p className={`${fade} ${headlineComplete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
             {headlineComplete && (
               <TextStream
                 text="Are you feeling drained from AI? You still love the craft but feel that your process is being smashed."
@@ -79,7 +79,7 @@ export default function HeroSection() {
               />
             )}
           </p>
-          <p className={`${fade} ${para1Complete ? "opacity-100" : "opacity-0"}`}>
+          <p className={`${fade} ${para1Complete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
             {para1Complete && (
               <TextStream
                 text="Enter404 is where I document how designers navigate this new world."
@@ -103,7 +103,7 @@ export default function HeroSection() {
       <div className="text-white text-sm mt-8 ml-8">⏎404</div>
 
       <div className="relative z-10 px-6 py-24 text-center">
-        <h1 className="text-white text-sm font-mono mb-6 leading-tight">
+        <h1 className="text-white text-sm font-mono font-medium tracking-wide mb-6 leading-tight">
           <TextStream
             text="Design inside the chaos."
             delay={60}
@@ -113,8 +113,8 @@ export default function HeroSection() {
           />
         </h1>
 
-        <div className="text-white/90 text-sm mb-6 space-y-3">
-          <p className={`${fade} ${headlineComplete ? "opacity-100" : "opacity-0"}`}>
+        <div className="text-white/90 text-sm leading-relaxed mb-6 space-y-3 text-pretty">
+          <p className={`${fade} ${headlineComplete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
             {headlineComplete && (
               <TextStream
                 text="Are you feeling drained from all this AI? You still love the craft but feel that your process is being smashed."
@@ -125,7 +125,7 @@ export default function HeroSection() {
               />
             )}
           </p>
-          <p className={`${fade} ${para1Complete ? "opacity-100" : "opacity-0"}`}>
+          <p className={`${fade} ${para1Complete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
             {para1Complete && (
               <TextStream
                 text="Enter404 is where I document how designers navigate this new world."

@@ -15,6 +15,7 @@ export default function EmailForm() {
   const [error, setError] = useState("");
   const [isPending, startTransition] = useTransition();
   const [isSuccess, setIsSuccess] = useState(false);
+  const [successVisible, setSuccessVisible] = useState(false);
   const [utmSource, setUtmSource] = useState<string | undefined>(undefined);
 
   useEffect(() => {
@@ -51,6 +52,7 @@ export default function EmailForm() {
         if (result.success) {
           setIsSuccess(true);
           setEmail("");
+          requestAnimationFrame(() => setSuccessVisible(true));
         } else {
           setError(result.error || "Something went wrong. Please try again.");
         }
@@ -62,7 +64,11 @@ export default function EmailForm() {
 
   if (isSuccess) {
     return (
-      <div className="text-white/90 text-sm">
+      <div
+        className={`text-white/90 text-sm transition-[opacity,transform] duration-300 ease-out ${
+          successVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+        }`}
+      >
         ✓ Check your email to confirm your subscription. If you don&apos;t see it, check your junk or spam folder.
       </div>
     );
@@ -112,7 +118,7 @@ export default function EmailForm() {
       <Button
         type="submit"
         disabled={isPending || !email.trim()}
-        className="bg-white/10 text-white border-white/30 hover:bg-white/20 disabled:opacity-50"
+        className="bg-white/10 text-white border-white/30 hover:bg-white/20 active:scale-[0.97] transition-transform disabled:opacity-50"
         aria-label="Submit email"
       >
         {isPending ? "Joining..." : "Join the explorers"}
