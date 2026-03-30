@@ -1,6 +1,6 @@
-import NextImage from "next/image";
 import Link from "next/link";
 import EmailForm from "@/components/email-form";
+import { AspectGifFigure } from "@/components/aspect-gif-figure";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { TypographyH1, TypographyP } from "@/components/ui/typography";
 import { ExperimentsList } from "@/components/experiments-list";
@@ -15,7 +15,7 @@ export default function HeroSection() {
         href={profileUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-3 rounded-sm text-foreground/80 outline-offset-4 transition-[color] duration-150 ease-out hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-foreground/40"
+        className="flex items-center gap-3 rounded-sm text-foreground/80 outline-offset-4 transition-[color,transform] duration-150 ease-[var(--ease-out-strong)] hover:text-foreground active:scale-[0.98] motion-reduce:active:scale-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/40"
         aria-label="Roy Quilor on X (opens in new tab)"
       >
         <Avatar className="h-8 w-8 ring-1 ring-inset ring-border shadow-sm">
@@ -41,17 +41,11 @@ export default function HeroSection() {
         className="mx-auto flex w-full min-w-0 max-w-2xl flex-col items-center px-4 pb-16 pt-24 sm:px-6"
       >
         <div className="w-full max-w-[720px]">
-          <div className="relative mx-auto aspect-video w-full overflow-hidden rounded-sm bg-muted">
-            <NextImage
-              src="/images/The Shining GIF.gif"
-              alt="A scene from The Shining."
-              fill
-              priority
-              unoptimized
-              className="object-contain"
-              sizes="(max-width: 768px) 100vw, 720px"
-            />
-          </div>
+          <AspectGifFigure
+            src="/images/The Shining GIF.gif"
+            alt="A scene from The Shining."
+            priority
+          />
           <div className="mt-2 text-center text-[11px] text-muted-foreground">
             I have no idea what I&apos;m doing
           </div>
@@ -75,7 +69,7 @@ export default function HeroSection() {
           </span>
           <Link
             href="/experiments"
-            className="font-display text-center text-xs text-foreground/55 transition-[color] duration-150 ease-out hover:text-foreground rounded-sm tracking-widest sm:text-sm sm:tracking-[1em] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/40"
+            className="font-display text-center text-xs text-foreground/55 transition-[color,transform] duration-150 ease-[var(--ease-out-strong)] hover:text-foreground active:scale-[0.98] motion-reduce:active:scale-100 rounded-sm tracking-widest sm:text-sm sm:tracking-[1em] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/40"
           >
             EXPERIMENTS
           </Link>

@@ -33,13 +33,13 @@ export function ExperimentsList({
           role="listitem"
           variant="default"
           size="sm"
-          className="flex-col items-stretch gap-2 border-0 bg-transparent p-0 shadow-none hover:bg-transparent"
+          className="-mx-2 flex-col items-stretch gap-2 rounded-md border-0 bg-transparent px-2 py-2 shadow-none transition-[background-color] duration-150 ease-[var(--ease-out-strong)] [&_[data-slot=item-title]_a]:hover:bg-transparent [@media(hover:hover)_and_(pointer:fine)]:hover:bg-muted/55 dark:[@media(hover:hover)_and_(pointer:fine)]:hover:bg-muted/25"
         >
           <ItemHeader className="flex-col items-stretch justify-start gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
             <ItemTitle className="min-w-0 w-full flex-1 font-medium leading-snug text-foreground sm:w-auto">
               <Link
                 href={`/experiments/${experiment.slug}`}
-                className="rounded-sm text-foreground transition-[color] duration-150 ease-out hover:text-foreground/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/40"
+                className="rounded-sm text-foreground transition-[color,transform] duration-150 ease-[var(--ease-out-strong)] hover:text-foreground/70 active:scale-[0.99] motion-reduce:active:scale-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/40"
               >
                 {experiment.title}
               </Link>
@@ -53,7 +53,7 @@ export function ExperimentsList({
                   href={experiment.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center bg-foreground font-display text-xs leading-none text-background transition-[background-color] duration-150 ease-out hover:bg-foreground/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/40"
+                  className="inline-flex items-center justify-center bg-foreground font-display text-xs leading-none text-background transition-[background-color,transform] duration-150 ease-[var(--ease-out-strong)] hover:bg-foreground/80 active:scale-[0.97] motion-reduce:active:scale-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/40"
                   aria-label={`Open ${experiment.title} live site (opens in new tab)`}
                 >
                   live ↗

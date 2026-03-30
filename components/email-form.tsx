@@ -69,7 +69,7 @@ export default function EmailForm() {
       <div
         role="status"
         aria-live="polite"
-        className={`w-full max-w-[320px] text-center text-foreground text-sm text-pretty transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${
+        className={`w-full max-w-[320px] text-center text-foreground text-sm text-pretty transition-[opacity,transform] duration-300 ease-[var(--ease-out-strong)] motion-reduce:transition-none ${
           successVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
         }`}
       >

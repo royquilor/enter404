@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import NextImage from "next/image";
 import { notFound } from "next/navigation";
+import { AspectGifFigure } from "@/components/aspect-gif-figure";
 import { experiments, getExperiment } from "@/lib/experiments";
 import EmailForm from "@/components/email-form";
 import { SiteHeader } from "@/components/site-header";
@@ -52,26 +52,20 @@ export default async function ExperimentPage({ params }: Props) {
       <main
         id="main-content"
         tabIndex={-1}
-        className="mx-auto flex max-w-3xl flex-col items-center px-6 pb-16 pt-24"
+        className="mx-auto flex min-w-0 max-w-3xl flex-col items-center px-4 pb-16 pt-24 sm:px-6"
       >
         <div className="w-full max-w-[720px]">
-          <div className="relative mx-auto aspect-video w-full overflow-hidden rounded-sm bg-muted">
-            <NextImage
-              src="/images/Cartoon Network GIF.gif"
-              alt="A cartoon character on a rainbow background."
-              fill
-              priority
-              unoptimized
-              className="object-contain"
-              sizes="(max-width: 768px) 100vw, 720px"
-            />
-          </div>
+          <AspectGifFigure
+            src="/images/Cartoon Network GIF.gif"
+            alt="A cartoon character on a rainbow background."
+            priority
+          />
           <div className="mt-2 text-center text-[11px] text-muted-foreground">
             Markdown + AI
           </div>
         </div>
 
-        <TypographyH1 className="mt-10 font-display text-center text-5xl leading-[0.92] text-foreground">
+        <TypographyH1 className="mt-10 max-w-full px-1 font-display text-center text-4xl leading-[0.92] text-foreground sm:px-0 sm:text-5xl">
           {experiment.title.toUpperCase()}
         </TypographyH1>
 
@@ -84,7 +78,7 @@ export default async function ExperimentPage({ params }: Props) {
               href={experiment.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center bg-foreground font-display leading-none text-xs text-background hover:bg-foreground/80 transition-[background-color] duration-150 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/40"
+              className="inline-flex items-center justify-center bg-foreground font-display text-xs leading-none text-background transition-[background-color,transform] duration-150 ease-[var(--ease-out-strong)] hover:bg-foreground/80 active:scale-[0.97] motion-reduce:active:scale-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/40"
               aria-label={`Open ${experiment.title} live site (opens in new tab)`}
             >
               live ↗

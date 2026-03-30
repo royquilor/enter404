@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import NextImage from "next/image";
 import EmailForm from "@/components/email-form";
+import { AspectGifFigure } from "@/components/aspect-gif-figure";
 import { ExperimentsList } from "@/components/experiments-list";
 import { SiteHeader } from "@/components/site-header";
 import { TypographyH1, TypographyP } from "@/components/ui/typography";
@@ -26,30 +26,24 @@ export default function ExperimentsPage() {
       <main
         id="main-content"
         tabIndex={-1}
-        className="mx-auto flex max-w-3xl flex-col items-center px-6 pb-16 pt-24"
+        className="mx-auto flex min-w-0 max-w-3xl flex-col items-center px-4 pb-16 pt-24 sm:px-6"
       >
         <div className="w-full max-w-[720px]">
-          <div className="relative mx-auto aspect-video w-full overflow-hidden rounded-sm bg-muted">
-            <NextImage
-              src="/images/This Is Fine GIF.gif"
-              alt="This is fine dog sitting in a burning room."
-              fill
-              priority
-              unoptimized
-              className="object-contain"
-              sizes="(max-width: 768px) 100vw, 720px"
-            />
-          </div>
+          <AspectGifFigure
+            src="/images/This Is Fine GIF.gif"
+            alt="This is fine dog sitting in a burning room."
+            priority
+          />
           <div className="mt-2 text-center text-[11px] text-muted-foreground">
             Asking Claude to destroy my PRD
           </div>
         </div>
 
-        <TypographyH1 className="mt-10 mb-10 font-display text-center text-5xl leading-[0.92] text-foreground">
+        <TypographyH1 className="mt-10 mb-10 max-w-full font-display text-center text-4xl leading-[0.92] text-foreground sm:text-5xl">
           EXPERIMENTS
         </TypographyH1>
 
-        <TypographyP className="mt-4 max-w-lg text-center text-sm leading-relaxed text-foreground/70 text-pretty [&:not(:first-child)]:mt-0">
+        <TypographyP className="mt-4 w-full max-w-lg min-w-0 text-center text-sm leading-relaxed text-foreground/70 text-pretty [&:not(:first-child)]:mt-0">
           Apps, tools, and workflows I&apos;ve shipped while figuring it out in the open. Subscribe for the honest write-up behind each one.
         </TypographyP>
 
