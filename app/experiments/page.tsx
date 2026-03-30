@@ -28,11 +28,12 @@ export default function ExperimentsPage() {
         tabIndex={-1}
         className="mx-auto flex min-w-0 max-w-3xl flex-col items-center px-4 pb-16 pt-24 sm:px-6"
       >
-        <div className="w-full max-w-[720px]">
+        <div className="w-full max-w-[320px]">
           <AspectGifFigure
             src="/images/This Is Fine GIF.gif"
             alt="This is fine dog sitting in a burning room."
             priority
+            sizes="320px"
           />
           <div className="mt-2 text-center text-[11px] text-muted-foreground">
             Asking Claude to destroy my PRD

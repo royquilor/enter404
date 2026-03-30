@@ -54,11 +54,12 @@ export default async function ExperimentPage({ params }: Props) {
         tabIndex={-1}
         className="mx-auto flex min-w-0 max-w-3xl flex-col items-center px-4 pb-16 pt-24 sm:px-6"
       >
-        <div className="w-full max-w-[720px]">
+        <div className="w-full max-w-[320px]">
           <AspectGifFigure
             src="/images/Cartoon Network GIF.gif"
             alt="A cartoon character on a rainbow background."
             priority
+            sizes="320px"
           />
           <div className="mt-2 text-center text-[11px] text-muted-foreground">
             Markdown + AI

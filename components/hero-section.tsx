@@ -40,11 +40,12 @@ export default function HeroSection() {
         tabIndex={-1}
         className="mx-auto flex w-full min-w-0 max-w-2xl flex-col items-center px-4 pb-16 pt-24 sm:px-6"
       >
-        <div className="w-full max-w-[720px]">
+        <div className="w-full max-w-[320px]">
           <AspectGifFigure
             src="/images/The Shining GIF.gif"
             alt="A scene from The Shining."
             priority
+            sizes="320px"
           />
           <div className="mt-2 text-center text-[11px] text-muted-foreground">
             I have no idea what I&apos;m doing
