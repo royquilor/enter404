@@ -11,7 +11,7 @@ export default function NotFound() {
         tabIndex={-1}
         className="mx-auto flex w-full max-w-2xl flex-col items-center px-6 pb-16 pt-24 text-center"
       >
-        <TypographyH1 className="mt-10 font-display text-5xl leading-[0.92]">
+        <TypographyH1 className="mt-10 mb-8 font-display text-5xl leading-[0.92]">
           NOT FOUND
         </TypographyH1>
         <TypographyP className="mt-6 max-w-lg text-sm leading-relaxed text-foreground/70 text-pretty [&:not(:first-child)]:mt-0">
