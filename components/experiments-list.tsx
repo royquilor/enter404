@@ -26,7 +26,7 @@ export function ExperimentsList({
   const items = typeof limit === "number" ? experiments.slice(0, limit) : experiments;
 
   return (
-    <ItemGroup className="mx-auto w-full max-w-lg gap-8">
+    <ItemGroup className="mx-auto w-full min-w-0 max-w-lg gap-6 sm:gap-8">
       {items.map((experiment) => (
         <Item
           key={experiment.slug}
@@ -35,8 +35,8 @@ export function ExperimentsList({
           size="sm"
           className="flex-col items-stretch gap-2 border-0 bg-transparent p-0 shadow-none hover:bg-transparent"
         >
-          <ItemHeader className="items-start gap-6">
-            <ItemTitle className="min-w-0 flex-1 font-medium leading-snug text-foreground">
+          <ItemHeader className="flex-col items-stretch justify-start gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+            <ItemTitle className="min-w-0 w-full flex-1 font-medium leading-snug text-foreground sm:w-auto">
               <Link
                 href={`/experiments/${experiment.slug}`}
                 className="rounded-sm text-foreground transition-[color] duration-150 ease-out hover:text-foreground/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/40"
@@ -44,7 +44,7 @@ export function ExperimentsList({
                 {experiment.title}
               </Link>
             </ItemTitle>
-            <ItemActions className="shrink-0 gap-3">
+            <ItemActions className="flex shrink-0 flex-row flex-wrap items-center gap-x-3 gap-y-2 self-stretch sm:self-auto sm:justify-end">
               <span className="text-xs tabular-nums text-muted-foreground">
                 {formatDateShort(experiment.date)}
               </span>
