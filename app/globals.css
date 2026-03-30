@@ -4,7 +4,8 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    /* Off‑white background to match the new light design comps. */
+    --background: 40 18% 96%;
     --foreground: 20 14.3% 4.1%;
     --border: 20 5.9% 90%;
     --card: 0 0% 100%;
@@ -65,9 +66,14 @@
 
   /* Native controls and form widgets follow page background (AGENTS: dark theme + Windows select fix). */
   html {
-    color-scheme: dark;
+    color-scheme: light;
     touch-action: manipulation;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0.08);
+  }
+
+  /* When the user explicitly opts into dark mode, align native UI. */
+  html.dark {
+    color-scheme: dark;
   }
 
   body {

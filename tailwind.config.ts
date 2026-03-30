@@ -58,7 +58,9 @@ const config: Config = {
   				'system-ui',
   				'sans-serif'
   			],
-  			mono: ['ui-monospace', 'monospace']
+  			display: ['var(--font-display)', 'ui-monospace', 'monospace'],
+  			// Departure Mono (same variable as `font-display`) for code + symbol glyphs (e.g. ✦ ✧).
+  			mono: ['var(--font-display)', 'ui-monospace', 'monospace'],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

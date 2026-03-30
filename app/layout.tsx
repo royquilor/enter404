@@ -1,11 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
+import { AgentationDev } from "@/components/agentation-dev";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
+const inter = localFont({
+  src: [
+    { path: "./fonts/InterVariable.woff2", style: "normal" },
+    { path: "./fonts/InterVariable-Italic.woff2", style: "italic" },
+  ],
+  display: "swap",
   variable: "--font-inter",
+});
+
+const departureMono = localFont({
+  src: [{ path: "./fonts/DepartureMono-Regular.woff2", style: "normal" }],
+  display: "swap",
+  variable: "--font-display",
 });
 
 /** Browser chrome / PWA status bar; matches primary dark surfaces (hero, experiments). */
@@ -70,17 +82,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${departureMono.variable}`}
+    >
       <body className="font-sans antialiased">
+        <Script id="theme-init" strategy="beforeInteractive">{`
+          (function () {
+            try {
+              var t = localStorage.getItem('theme');
+              if (t === 'dark') document.documentElement.classList.add('dark');
+              if (t === 'light') document.documentElement.classList.remove('dark');
+            } catch (e) {}
+          })();
+        `}</Script>
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
-        <script
+        <Script
+          id="json-ld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
         <Analytics />
+        <AgentationDev />
       </body>
     </html>
   );

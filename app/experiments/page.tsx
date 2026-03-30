@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { CornerDownLeft } from "lucide-react";
-import { experiments } from "@/lib/experiments";
+import Image from "next/image";
+import EmailForm from "@/components/email-form";
+import { ExperimentsList } from "@/components/experiments-list";
+import { SiteHeader } from "@/components/site-header";
+import { TypographyH1, TypographyP } from "@/components/ui/typography";
 
 export const metadata: Metadata = {
   title: "Experiments — Enter404",
@@ -16,86 +18,49 @@ export const metadata: Metadata = {
   },
 };
 
-function formatDate(date: string) {
-  const [year, month] = date.split("-");
-  return new Date(Number(year), Number(month) - 1).toLocaleDateString("en-US", {
-    month: "short",
-    year: "numeric",
-  });
-}
-
 export default function ExperimentsPage() {
   return (
-    <main
-      id="main-content"
-      className="min-h-screen bg-[#0a0a0a] px-6 py-10 font-sans"
-      tabIndex={-1}
-    >
-      <div className="max-w-xl mx-auto">
+    <div className="min-h-screen bg-background text-foreground">
+      <SiteHeader />
 
-        {/* Nav */}
-        <div className="mb-12">
-          <Link
-            href="/"
-            className="text-white/35 text-sm hover:text-white/70 transition-[color] duration-200 ease-out flex items-center gap-1"
-          >
-            <span className="inline-flex shrink-0 relative top-px" aria-hidden={true}>
-              <CornerDownLeft size={12} />
-            </span>
-            404
-          </Link>
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="mx-auto flex max-w-3xl flex-col items-center px-6 pb-16 pt-24"
+      >
+        <div className="w-full max-w-[720px]">
+          <div className="relative mx-auto aspect-video w-full overflow-hidden rounded-sm bg-muted">
+            <Image
+              src="/images/This Is Fine GIF.gif"
+              alt="This is fine dog sitting in a burning room."
+              fill
+              priority
+              unoptimized
+              className="object-contain"
+              sizes="(max-width: 768px) 100vw, 720px"
+            />
+          </div>
+          <div className="mt-2 text-center text-[11px] text-muted-foreground">
+            Asking Claude to destroy my PRD
+          </div>
         </div>
 
-        {/* Header */}
-        <div className="mb-10">
-          <h1 className="text-white text-sm font-medium tracking-wide mb-3 text-balance">
-            Experiments
-          </h1>
-          <p className="text-white/50 text-sm leading-relaxed text-pretty">
-            Apps, tools, and workflows I&apos;ve shipped while figuring it out
-            in the open. Subscribe for the honest write-up behind each one.
-          </p>
+        <TypographyH1 className="mt-10 mb-10 font-display text-center text-5xl leading-[0.92] text-foreground">
+          EXPERIMENTS
+        </TypographyH1>
+
+        <TypographyP className="mt-4 max-w-lg text-center text-sm leading-relaxed text-foreground/70 text-pretty [&:not(:first-child)]:mt-0">
+          Apps, tools, and workflows I&apos;ve shipped while figuring it out in the open. Subscribe for the honest write-up behind each one.
+        </TypographyP>
+
+        <div className="mt-8 w-full max-w-sm">
+          <EmailForm />
         </div>
 
-        {/* List */}
-        <ul className="space-y-8">
-          {experiments.map((experiment) => (
-            <li key={experiment.slug}>
-              <div>
-                <div className="flex items-baseline justify-between gap-4 mb-1">
-                  <Link
-                    href={`/experiments/${experiment.slug}`}
-                    className="text-white text-sm font-medium hover:text-white/80 transition-[color] duration-200 ease-out"
-                  >
-                    {experiment.title}
-                  </Link>
-                  <div className="flex items-baseline gap-3 shrink-0">
-                    {experiment.url && (
-                      <a
-                        href={experiment.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white/40 text-xs hover:text-white/70 transition-[color] duration-200 ease-out rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50"
-                        aria-label={`Open ${experiment.title} live site (opens in new tab)`}
-                      >
-                        live ↗
-                      </a>
-                    )}
-                    <span className="text-white/30 text-xs tabular-nums">
-                      {formatDate(experiment.date)}
-                    </span>
-                  </div>
-                </div>
-
-                <p className="text-white/50 text-sm leading-relaxed text-pretty">
-                  {experiment.description}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ul>
-
-      </div>
-    </main>
+        <div className="mt-14 w-full">
+          <ExperimentsList />
+        </div>
+      </main>
+    </div>
   );
 }

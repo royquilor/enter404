@@ -54,7 +54,7 @@ export default async function Image() {
             fontFamily,
           }}
         >
-          ⏎404
+          404
         </div>
 
         <div

@@ -11,8 +11,10 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   async headers() {
     return [
+      // Pages and public URLs only — do not attach security headers to `/_next/*` (chunks, HMR).
+      // That avoids edge cases where nosniff + wrong Content-Type on a dev/proxy response blocks all CSS/JS.
       {
-        source: "/(.*)",
+        source: "/((?!_next/).*)",
         headers: securityHeaders,
       },
     ];
