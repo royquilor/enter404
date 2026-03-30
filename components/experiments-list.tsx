@@ -30,7 +30,7 @@ export function ExperimentsList({
               >
                 {experiment.title}
               </Link>
-              <TypographyP className="w-full text-sm leading-relaxed text-muted-foreground text-pretty [&:not(:first-child)]:mt-2">
+              <TypographyP className="line-clamp-2 w-full min-w-0 text-sm leading-relaxed text-muted-foreground [&:not(:first-child)]:mt-2">
                 {experiment.description}
               </TypographyP>
             </div>

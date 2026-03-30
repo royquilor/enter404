@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import NextImage from "next/image";
 import EmailForm from "@/components/email-form";
 import { ExperimentsList } from "@/components/experiments-list";
 import { SiteHeader } from "@/components/site-header";
@@ -30,7 +30,7 @@ export default function ExperimentsPage() {
       >
         <div className="w-full max-w-[720px]">
           <div className="relative mx-auto aspect-video w-full overflow-hidden rounded-sm bg-muted">
-            <Image
+            <NextImage
               src="/images/This Is Fine GIF.gif"
               alt="This is fine dog sitting in a burning room."
               fill

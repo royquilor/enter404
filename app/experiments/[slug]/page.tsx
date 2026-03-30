@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import NextImage from "next/image";
 import { notFound } from "next/navigation";
 import { experiments, getExperiment } from "@/lib/experiments";
 import EmailForm from "@/components/email-form";
@@ -56,7 +56,7 @@ export default async function ExperimentPage({ params }: Props) {
       >
         <div className="w-full max-w-[720px]">
           <div className="relative mx-auto aspect-video w-full overflow-hidden rounded-sm bg-muted">
-            <Image
+            <NextImage
               src="/images/Cartoon Network GIF.gif"
               alt="A cartoon character on a rainbow background."
               fill

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import NextImage from "next/image";
 import Link from "next/link";
 import EmailForm from "@/components/email-form";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -42,7 +42,7 @@ export default function HeroSection() {
       >
         <div className="w-full max-w-[720px]">
           <div className="relative mx-auto aspect-video w-full overflow-hidden rounded-sm bg-muted">
-            <Image
+            <NextImage
               src="/images/The Shining GIF.gif"
               alt="A scene from The Shining."
               fill
