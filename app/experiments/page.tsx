@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import EmailForm from "@/components/email-form";
 import { AspectGifFigure } from "@/components/aspect-gif-figure";
+import { HeroFloatMedia } from "@/components/hero-float-media";
 import { ExperimentsList } from "@/components/experiments-list";
 import { SiteHeader } from "@/components/site-header";
 import { TypographyH1, TypographyP } from "@/components/ui/typography";
@@ -29,12 +30,14 @@ export default function ExperimentsPage() {
         className="mx-auto flex min-w-0 max-w-3xl flex-col items-center px-4 pb-16 pt-24 sm:px-6"
       >
         <div className="w-full max-w-[320px]">
-          <AspectGifFigure
-            src="/images/This Is Fine GIF.gif"
-            alt="This is fine dog sitting in a burning room."
-            priority
-            sizes="320px"
-          />
+          <HeroFloatMedia>
+            <AspectGifFigure
+              src="/images/This Is Fine GIF.gif"
+              alt="This is fine dog sitting in a burning room."
+              priority
+              sizes="320px"
+            />
+          </HeroFloatMedia>
           <div className="mt-2 text-center text-[11px] text-muted-foreground">
             Asking Claude to destroy my PRD
           </div>

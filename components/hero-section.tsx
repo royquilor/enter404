@@ -1,6 +1,7 @@
 import Link from "next/link";
 import EmailForm from "@/components/email-form";
 import { AspectGifFigure } from "@/components/aspect-gif-figure";
+import { HeroFloatMedia } from "@/components/hero-float-media";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { TypographyH1, TypographyP } from "@/components/ui/typography";
 import { ExperimentsList } from "@/components/experiments-list";
@@ -41,12 +42,14 @@ export default function HeroSection() {
         className="mx-auto flex w-full min-w-0 max-w-2xl flex-col items-center px-4 pb-16 pt-24 sm:px-6"
       >
         <div className="w-full max-w-[320px]">
-          <AspectGifFigure
-            src="/images/The Shining GIF.gif"
-            alt="A scene from The Shining."
-            priority
-            sizes="320px"
-          />
+          <HeroFloatMedia>
+            <AspectGifFigure
+              src="/images/The Shining GIF.gif"
+              alt="A scene from The Shining."
+              priority
+              sizes="320px"
+            />
+          </HeroFloatMedia>
           <div className="mt-2 text-center text-[11px] text-muted-foreground">
             I have no idea what I&apos;m doing
           </div>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { experiments } from "@/lib/experiments";
+import { LiveLabel } from "@/components/live-label";
 import {
   Item,
   ItemActions,
@@ -56,7 +57,8 @@ export function ExperimentsList({
                   className="inline-flex items-center justify-center bg-foreground font-display text-xs leading-none text-background transition-[background-color,transform] duration-150 ease-[var(--ease-out-strong)] hover:bg-foreground/80 active:scale-[0.97] motion-reduce:active:scale-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/40"
                   aria-label={`Open ${experiment.title} live site (opens in new tab)`}
                 >
-                  live ↗
+                  <LiveLabel />
+                  <span aria-hidden>&nbsp;↗</span>
                 </a>
               )}
             </ItemActions>

@@ -1,5 +1,6 @@
 import Link from "next/link"
 
+import { LogoLabel } from "@/components/logo-label"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export function SiteHeader() {
@@ -11,7 +12,7 @@ export function SiteHeader() {
           className="font-display text-[12px] tracking-[0.22em] text-foreground/70 hover:text-foreground transition-[color] duration-150 ease-out rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/50"
           aria-label="Go to Enter404 home"
         >
-          ↵404
+          <LogoLabel />
         </Link>
 
         <ThemeToggle />

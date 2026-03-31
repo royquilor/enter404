@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AspectGifFigure } from "@/components/aspect-gif-figure";
+import { HeroFloatMedia } from "@/components/hero-float-media";
+import { LiveLabel } from "@/components/live-label";
 import { experiments, getExperiment } from "@/lib/experiments";
 import EmailForm from "@/components/email-form";
 import { SiteHeader } from "@/components/site-header";
@@ -55,12 +57,14 @@ export default async function ExperimentPage({ params }: Props) {
         className="mx-auto flex min-w-0 max-w-3xl flex-col items-center px-4 pb-16 pt-24 sm:px-6"
       >
         <div className="w-full max-w-[320px]">
-          <AspectGifFigure
-            src="/images/Cartoon Network GIF.gif"
-            alt="A cartoon character on a rainbow background."
-            priority
-            sizes="320px"
-          />
+          <HeroFloatMedia>
+            <AspectGifFigure
+              src="/images/Cartoon Network GIF.gif"
+              alt="A cartoon character on a rainbow background."
+              priority
+              sizes="320px"
+            />
+          </HeroFloatMedia>
           <div className="mt-2 text-center text-[11px] text-muted-foreground">
             Markdown + AI
           </div>
@@ -82,7 +86,8 @@ export default async function ExperimentPage({ params }: Props) {
               className="inline-flex items-center justify-center bg-foreground font-display text-xs leading-none text-background transition-[background-color,transform] duration-150 ease-[var(--ease-out-strong)] hover:bg-foreground/80 active:scale-[0.97] motion-reduce:active:scale-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/40"
               aria-label={`Open ${experiment.title} live site (opens in new tab)`}
             >
-              live ↗
+              <LiveLabel />
+              <span aria-hidden>&nbsp;↗</span>
             </a>
           )}
         </div>
