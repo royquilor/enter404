@@ -98,8 +98,8 @@ export default function EmailForm() {
         aria-hidden="true"
       />
 
-      <div className="w-full max-w-sm">
-        <div className="flex w-full items-center rounded-full border border-border bg-background/70 shadow-sm backdrop-blur-sm">
+      <div className="w-full">
+        <div className="flex w-full items-center rounded-full border border-border bg-white shadow-sm">
           <Input
             ref={emailInputRef}
             id="email"
@@ -123,10 +123,8 @@ export default function EmailForm() {
             <Button
               type="submit"
               disabled={isPending}
-              className="size-10 rounded-full px-0"
-              aria-label={
-                isPending ? "Submitting, please wait" : "Submit your email to subscribe"
-              }
+              className="rounded-full px-5 h-9 text-sm"
+              aria-label={isPending ? "Submitting, please wait" : "Subscribe to the weekly report"}
             >
               {isPending ? (
                 <>
@@ -134,13 +132,10 @@ export default function EmailForm() {
                     className="h-4 w-4 shrink-0 animate-spin motion-reduce:animate-none opacity-90"
                     aria-hidden={true}
                   />
-                  <span className="sr-only">Enter</span>
+                  <span className="sr-only">Subscribing…</span>
                 </>
               ) : (
-                <>
-                  <span aria-hidden>↵</span>
-                  <span className="sr-only">Enter</span>
-                </>
+                "Subscribe"
               )}
             </Button>
           </div>
