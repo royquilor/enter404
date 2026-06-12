@@ -68,6 +68,7 @@ export default function HeroSection() {
                   Now building distribution tools to find out.
                 </p>
                 <p className="mt-0">Starting with research.</p>
+                <p className="mt-0">A dad, a husband, made in the &apos;80s.</p>
               </div>
             </div>
           </section>
