@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { validateEmail, normalizeEmail } from "@/lib/validation";
 import { submitEmail } from "@/app/actions";
+import { cn } from "@/lib/utils";
 
 function getUtmSourceFromLocation(): string | undefined {
   if (typeof window === "undefined") return undefined;
@@ -18,7 +19,7 @@ function getUtmSourceFromLocation(): string | undefined {
  * Email capture form: client validation, server action, accessible errors and loading state.
  * Follows AGENTS.md: 16px+ inputs on mobile, autocomplete, no paste blocking, spinner + label, submit disabled only while pending.
  */
-export default function EmailForm() {
+export default function EmailForm({ className }: { className?: string }) {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [isPending, startTransition] = useTransition();
@@ -69,9 +70,11 @@ export default function EmailForm() {
       <div
         role="status"
         aria-live="polite"
-        className={`w-full max-w-[320px] text-center text-foreground text-sm text-pretty transition-[opacity,transform] duration-300 ease-[var(--ease-out-strong)] motion-reduce:transition-none ${
-          successVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-        }`}
+        className={cn(
+          "w-full text-sm leading-5 text-foreground text-pretty transition-[opacity,transform] duration-300 ease-[var(--ease-out-strong)] motion-reduce:transition-none",
+          successVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2",
+          className
+        )}
       >
         ✓ Check your email to confirm your subscription. If you don&apos;t see it, check your junk or spam folder.
       </div>
@@ -79,7 +82,7 @@ export default function EmailForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-center gap-3">
+    <form onSubmit={handleSubmit} className={cn("flex w-full flex-col gap-2", className)}>
       {/* Honeypot — hidden from users; tabIndex -1 keeps it out of tab order (AGENTS: focus order). */}
       <input
         id="website"
@@ -98,55 +101,51 @@ export default function EmailForm() {
         aria-hidden="true"
       />
 
-      <div className="w-full">
-        <div className="flex w-full items-center rounded-full border border-border bg-white shadow-sm">
-          <Input
-            ref={emailInputRef}
-            id="email"
-            name="email"
-            type="email"
-            inputMode="email"
-            autoComplete="email"
-            spellCheck={false}
-            placeholder="you@example.com…"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={isPending}
-            maxLength={254}
-            className="h-11 min-h-11 flex-1 border-0 bg-transparent px-5 text-base sm:text-sm text-foreground placeholder:text-muted-foreground focus-visible:ring-0 focus-visible:ring-offset-0"
-            aria-label="Email address"
-            aria-invalid={error ? true : undefined}
-            aria-describedby={error ? "email-error" : undefined}
-          />
+      <div className="flex w-full min-w-0 flex-col gap-2 sm:flex-row sm:items-start">
+        <Input
+          ref={emailInputRef}
+          id="email"
+          name="email"
+          type="email"
+          inputMode="email"
+          autoComplete="email"
+          spellCheck={false}
+          placeholder="you@example.com…"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          disabled={isPending}
+          maxLength={254}
+          className="h-11 min-h-11 flex-1 border-input bg-background px-3 py-2 text-base shadow-sm sm:h-9 sm:min-h-9 sm:text-sm"
+          aria-label="Email address"
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? "email-error" : undefined}
+        />
 
-          <div className="p-1">
-            <Button
-              type="submit"
-              disabled={isPending}
-              className="rounded-full px-5 h-9 text-sm"
-              aria-label={isPending ? "Submitting, please wait" : "Subscribe to the weekly report"}
-            >
-              {isPending ? (
-                <>
-                  <Loader2
-                    className="h-4 w-4 shrink-0 animate-spin motion-reduce:animate-none opacity-90"
-                    aria-hidden={true}
-                  />
-                  <span className="sr-only">Subscribing…</span>
-                </>
-              ) : (
-                "Subscribe"
-              )}
-            </Button>
-          </div>
-        </div>
-
-        {error && (
-          <p id="email-error" className="text-destructive text-sm mt-2" role="alert">
-            {error}
-          </p>
-        )}
+        <Button
+          type="submit"
+          disabled={isPending}
+          className="h-11 min-h-11 shrink-0 px-4 py-2 text-base sm:h-9 sm:min-h-9 sm:text-sm"
+          aria-label={isPending ? "Submitting, please wait" : "Subscribe to the weekly idea"}
+        >
+          {isPending ? (
+            <>
+              <Loader2
+                className="h-4 w-4 shrink-0 animate-spin motion-reduce:animate-none opacity-90"
+                aria-hidden={true}
+              />
+              <span className="sr-only">Subscribing…</span>
+            </>
+          ) : (
+            "Subscribe"
+          )}
+        </Button>
       </div>
+
+      {error && (
+        <p id="email-error" className="text-destructive text-sm" role="alert">
+          {error}
+        </p>
+      )}
     </form>
   );
 }
